@@ -29,7 +29,7 @@ ggplot(iris.data, aes(x = Petal.Length, y = Petal.Width, colour = Species)) +
 s.train <- sample(150,100) 
 s.train
 
-# creat training and testing sets 
+# create training and testing sets 
 iris.train <-iris.data[s.train,]
 iris.test <-iris.data[-s.train,] 
 
