@@ -3,4 +3,7 @@
 ### Labs
 
 [**Lab 1**](/labs/lab%201)
+
 [**Lab 2**](/labs/lab%202)
+
+[**Lab 3**](/labs/lab%203)
