@@ -73,7 +73,7 @@ accuracy2 # 0.6539075
 
 # best model
 best_train <- train_subset2
-test_test <- test_subset2
+best_test <- test_subset2
 
 
 ## OPTIMAL K-VALUE
@@ -84,12 +84,12 @@ accuracies <- numeric(length(k_values))
 
 for (i in seq_along(k_values)) {
   current_k <- k_values[i]
-  knn_predicted <-knn(train = train_subset1, test = test_subset1, cl = train_labels, k = current_k)
+  knn_predicted <-knn(train = best_train, test = best_test, cl = train_labels, k = current_k)
   table_model <- table(knn_predicted, test_labels, dnn=list('predicted','actual'))
   accuracies[i] <- sum(diag(table_model)) / sum(table_model)
 }
 
-# optimal k value (k = 48, accuracy = 0.6411483)
+# optimal k value (k = 25, accuracy = 0.6897927)
 optimal_index <- which.max(accuracies)
 optimal_k <- k_values[optimal_index]
 highest_accuracy <- accuracies[optimal_index]
