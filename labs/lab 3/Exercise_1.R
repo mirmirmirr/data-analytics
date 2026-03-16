@@ -13,7 +13,7 @@ library(psych)
 library(class)
 
 ## read data
-setwd("~/coding/data_analytics/labs/lab 3/")
+setwd("~/coding/data-analytics/labs/lab 3/")
 abalone <- read.csv("abalone/abalone.data", header=FALSE)
 
 ## rename columns

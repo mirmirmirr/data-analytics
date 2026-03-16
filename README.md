@@ -7,3 +7,5 @@
 [**Lab 2**](/labs/lab%202)
 
 [**Lab 3**](/labs/lab%203)
+
+[**Lab 4**](/labs/lab%204)
