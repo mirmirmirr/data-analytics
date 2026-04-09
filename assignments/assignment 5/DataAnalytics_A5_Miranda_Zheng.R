@@ -24,8 +24,6 @@ manhatten_data$SALE.PRICE <- as.numeric(gsub(",", "", manhatten_data$SALE.PRICE)
 manhatten_data$TOTAL.UNITS <- as.numeric(manhatten_data$TOTAL.UNITS)
 
 manhatten_data <- na.omit(manhatten_data[, c("NEIGHBORHOOD", "SALE.PRICE", "LAND.SQUARE.FEET", "GROSS.SQUARE.FEET", "TOTAL.UNITS")])
-
-# keep only valid positive values
 manhatten_data <- manhatten_data[
   manhatten_data$SALE.PRICE > 100 &
   manhatten_data$LAND.SQUARE.FEET > 0 &
@@ -46,32 +44,53 @@ manhatten_data$logTotalUnits <- log10(manhatten_data$TOTAL.UNITS)
 # A. EXPLORATORY DATA ANALYSIS
 # ==============================================================================
 
+# Sales Price
 ggplot(manhatten_data, aes(x = logSalePrice)) + 
   geom_histogram(fill="blue", bins=50) + 
   labs(title="Distribution of Sale Price (Log Scale)", x="Log10(Sale Price)")
 
+ggplot(manhatten_data, aes(y = logSalePrice)) +
+  geom_boxplot(fill = "blue") +
+  labs(title = "Boxplot of Sale Price to Identify Outliers", y = "Log10(Sale Price ($))")
+
+# Land Square Feet
 ggplot(manhatten_data, aes(x = logLandSqFt)) + 
   geom_histogram(fill="green", bins=50) + 
   labs(title="Distribution of Land Square Feet (Log Scale)", x="Log10(Land Square Feet)")
 
+ggplot(manhatten_data, aes(y = logLandSqFt)) +
+  geom_boxplot(fill = "green") +
+  labs(title = "Boxplot of Land Square Feet to Identify Outliers", y = "Log10(Land Square Feet ($))")
+
+# Gross Square Feet
 ggplot(manhatten_data, aes(x = logGrossSqFt)) + 
   geom_histogram(fill="orange", bins=50) + 
   labs(title="Distribution of Gross Square Feet (Log Scale)", x="Log10(Gross Square Feet)")
 
+ggplot(manhatten_data, aes(y = logGrossSqFt)) +
+  geom_boxplot(fill = "orange") +
+  labs(title = "Boxplot of Gross Square Feet to Identify Outliers", y = "Log10(Gross Square Feet ($))")
+
+# Total Units
 ggplot(manhatten_data, aes(x = logTotalUnits)) + 
   geom_histogram(fill="purple", bins=50) + 
   labs(title="Distribution of Total Units (Log Scale)", x="Log10(Total Units)")
 
-# Plotting Outliers in Sale Price
-# Boxplots are the best way to demonstrate outliers relative to the median/quartiles
+ggplot(manhatten_data, aes(y = logTotalUnits)) +
+  geom_boxplot(fill = "purple") +
+  labs(title = "Boxplot of Total Units to Identify Outliers", y = "Log10(Total Units)")
+
+# plotting outliers in Sale Price
+# Box Plot
 ggplot(manhatten_data, aes(y = logSalePrice)) +
   geom_boxplot(fill = "tomato") +
   labs(title = "Boxplot of Sale Price to Identify Outliers", y = "Log10(Sale Price ($))")
 
+# Q-Q Plot
 qqnorm(manhatten_data$logSalePrice, main = "Q-Q Plot: Log10(Sale Price)")
 qqline(manhatten_data$logSalePrice, col = "blue", lwd = 2)
 
-# Identify Sale Price outliers (on log scale)
+# IQR calculation for Sale Price
 q1 <- quantile(manhatten_data$logSalePrice, 0.25, na.rm = TRUE)
 q3 <- quantile(manhatten_data$logSalePrice, 0.75, na.rm = TRUE)
 iqr_val <- IQR(manhatten_data$logSalePrice, na.rm = TRUE)
@@ -90,7 +109,7 @@ sale_price_outliers <- manhatten_data %>%
   select(row_id, SALE.PRICE, logSalePrice, LAND.SQUARE.FEET, GROSS.SQUARE.FEET, TOTAL.UNITS) %>%
   arrange(desc(SALE.PRICE))
 
-# 2) Histogram with IQR cutoffs
+# histogram with IQR cutoffs
 ggplot(manhatten_data, aes(x = logSalePrice)) +
   geom_histogram(bins = 50, fill = "steelblue", color = "white") +
   geom_vline(xintercept = lower_bound, linetype = "dashed", color = "red", linewidth = 1) +
@@ -101,7 +120,7 @@ ggplot(manhatten_data, aes(x = logSalePrice)) +
     y = "Count"
   )
 
-# 3) Scatter plot with outliers highlighted
+# scatter plot with outliers highlighted
 ggplot(manhatten_data, aes(x = logGrossSqFt, y = logSalePrice, color = sale_outlier)) +
   geom_point(alpha = 0.6) +
   geom_smooth(method = "lm", se = FALSE, color = "black") +
@@ -118,8 +137,8 @@ ggplot(manhatten_data, aes(x = logLandSqFt, y = logSalePrice, color = sale_outli
   geom_smooth(method = "lm", se = FALSE, color = "black") +
   scale_color_manual(values = c("FALSE" = "grey60", "TRUE" = "red")) +
   labs(
-    title = "Sale Price vs Gross Sq Ft (Outliers Highlighted)",
-    x = "Log10(Gross Sq Ft)",
+    title = "Sale Price vs Land Sq Ft (Outliers Highlighted)",
+    x = "Log10(Land Sq Ft)",
     y = "Log10(Sale Price)",
     color = "Outlier"
   )
@@ -129,8 +148,8 @@ ggplot(manhatten_data, aes(x = logTotalUnits, y = logSalePrice, color = sale_out
   geom_smooth(method = "lm", se = FALSE, color = "black") +
   scale_color_manual(values = c("FALSE" = "grey60", "TRUE" = "red")) +
   labs(
-    title = "Sale Price vs Gross Sq Ft (Outliers Highlighted)",
-    x = "Log10(Gross Sq Ft)",
+    title = "Sale Price vs Total Units (Outliers Highlighted)",
+    x = "Log10(Total Units)",
     y = "Log10(Sale Price)",
     color = "Outlier"
   )
@@ -146,14 +165,14 @@ train_indices <- sample(seq_len(nrow(manhatten_data)), size = train_size)
 train_data <- manhatten_data[train_indices, ]
 test_data <- manhatten_data[-train_indices, ]
 
-# Fit linear regression model
-model1 <- lm(logSalePrice ~ logLandSqFt + logGrossSqFt + logTotalUnits, data = train_data)
-model2 <- lm(logSalePrice ~ logLandSqFt + logGrossSqFt, data = train_data)
-model3 <- lm(logSalePrice ~ logTotalUnits + logLandSqFt, data = train_data)
-model4 <- lm(logSalePrice ~ logLandSqFt, data = train_data)
+# linear regression models
+model1 <- lm(logSalePrice ~ logLandSqFt, data = train_data)
+model2 <- lm(logSalePrice ~ logLandSqFt + logGrossSqFt + logTotalUnits, data = train_data)
+model3 <- lm(logSalePrice ~ logLandSqFt + logGrossSqFt, data = train_data)
+model4 <- lm(logSalePrice ~ logTotalUnits + logLandSqFt, data = train_data)
 model5 <- lm(logSalePrice ~ logGrossSqFt, data = train_data)
 
-# Best performing model based on R-squared and p-values
+# Models based on R-squared and p-values
 summary(model1)
 summary(model2)
 summary(model3)
@@ -170,13 +189,15 @@ summary(model5)
 neighborhood_data <- c("CHELSEA", "CHINATOWN", 
                         "EAST VILLAGE", "GREENWICH VILLAGE-CENTRAL") 
 
+# filter data
 data <- manhatten_data %>%
   filter(NEIGHBORHOOD %in% neighborhood_data) %>%
   select(NEIGHBORHOOD, logSalePrice, logLandSqFt, logGrossSqFt, logTotalUnits)
 
-
+# choose neighborhood as a factor
 data$NEIGHBORHOOD <- as.factor(data$NEIGHBORHOOD)
 
+# classification
 set.seed(456)
 train_idx <- sample(1:nrow(data), 0.7 * nrow(data))
 train_data <- data[train_idx, ]
@@ -187,7 +208,6 @@ features <- c("logSalePrice", "logLandSqFt", "logGrossSqFt", "logTotalUnits")
 train_scaled <- scale(train_data[, features])
 test_scaled <- scale(test_data[, features])
 
-# 4. Train and Predict
 # Model 1: k-Nearest Neighbors (k=5)
 knn_pred <- knn(train = train_scaled, test = test_scaled, 
                 cl = train_data$NEIGHBORHOOD, k = 5)
@@ -197,7 +217,7 @@ rf_model <- randomForest(NEIGHBORHOOD ~ logSalePrice + logLandSqFt + logGrossSqF
                          data = train_data, ntree = 100)
 rf_pred <- predict(rf_model, test_data)
 
-# Model 3: Decision Tree (rpart)
+# Model 3: Decision Tree
 dt_model <- rpart(NEIGHBORHOOD ~ logSalePrice + logLandSqFt + logGrossSqFt + logTotalUnits, 
                   data = train_data, method = "class")
 dt_pred <- predict(dt_model, test_data, type = "class")
@@ -207,10 +227,10 @@ eval_metrics <- function(actual, predicted, label) {
   print(paste("Contingency Table for", label))
   print(cm)
   
-  # Calculate Accuracy
+  # accuracy
   acc <- sum(diag(cm)) / sum(cm)
   
-  # For multi-class, we calculate Macro-averaged Precision and Recall
+  # precision + recall
   precision <- diag(cm) / colSums(cm)
   recall <- diag(cm) / rowSums(cm)
   f1 <- 2 * (precision * recall) / (precision + recall)
