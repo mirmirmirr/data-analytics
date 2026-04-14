@@ -1,36 +1,56 @@
+import { useState, useEffect } from "react";
 import ReactECharts from "echarts-for-react";
 import * as echarts from "echarts";
 import type { Song } from "@/types/song";
 
 type Props = {
   data: Song[];
+  colorMode: "cluster" | "genre";
 };
 
-export default function MusicMap({ data }: Props) {
-  // 1. Find all unique clusters in the dataset
-  const uniqueClusters = Array.from(new Set(data.map((d) => d.cluster))).sort();
+export default function MusicMap({ data, colorMode }: Props) {
+  const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
 
-  // A premium, Apple-inspired color palette for the clusters
+  useEffect(() => {
+    setSelectedGroup(null);
+  }, [colorMode]);
+
+  const uniqueGroups = Array.from(
+    new Set(
+      data.map((d) => (colorMode === "cluster" ? d.cluster : d.track_genre)),
+    ),
+  ).sort();
+
   const colors = [
-    "#5E5CE6", // Indigo
-    "#FFD60A", // Yellow
-    "#FF375F", // Pink
-    "#32D74B", // Green
-    "#64D2FF", // Light Blue
-    "#FF9F0A", // Orange
-    "#BF5AF2", // Purple
+    "#FF3B30",
+    "#FF9F0A",
+    "#FFCC00",
+    "#34C759",
+    "#00C7BE",
+    "#32ADE6",
+    "#007AFF",
+    "#5856D6",
+    "#AF52DE",
+    "#FF2D55",
   ];
 
-  // 2. Generate a separate ECharts series for every cluster to keep high performance
-  const series = uniqueClusters.map((clusterId, index) => {
-    // Filter data to only include songs in this cluster
-    const clusterData = data.filter((d) => d.cluster === clusterId);
+  const series = uniqueGroups.map((groupId, index) => {
+    const groupData = data.filter((d) =>
+      colorMode === "cluster"
+        ? d.cluster === groupId
+        : d.track_genre === groupId,
+    );
+
+    // Dim non-selected groups when a group is selected
+    const isDimmed =
+      selectedGroup !== null && selectedGroup !== String(groupId);
+    const activeColor = colors[index % colors.length];
 
     return {
       type: "scatter",
-      name: `Cluster ${clusterId}`,
-      // Format: [x, y, track_name, cluster, artists, album_name]
-      data: clusterData.map((d) => [
+      id: `group-${index}`,
+      name: `${colorMode === "cluster" ? "Cluster" : "Genre"} ${groupId}`,
+      data: groupData.map((d) => [
         d.x,
         d.y,
         d.track_name,
@@ -39,25 +59,24 @@ export default function MusicMap({ data }: Props) {
         d.album_name,
         d.track_genre,
       ]),
-      symbolSize: 20,
-      large: true, // 🔥 Keeps the 10k points rendering at 60fps
+      symbolSize: 10,
+      large: true,
       largeThreshold: 2000,
+      universalTransition: true,
       itemStyle: {
-        color: colors[index % colors.length],
-        opacity: 0.6,
+        color: isDimmed ? "#CECECE" : activeColor,
+        opacity: isDimmed ? 0.15 : 0.8,
       },
       emphasis: {
         scale: true,
-        itemStyle: {
-          opacity: 1,
-        },
+        itemStyle: { opacity: 1 },
       },
     };
   });
 
   const options: echarts.EChartsOption = {
-    animation: false, // Ensures zooming feels like a solid map, not floating points
-    backgroundColor: "transparent", // Lets the background from App.tsx show through
+    animation: false,
+    backgroundColor: "transparent",
     tooltip: {
       trigger: "item",
       backgroundColor: "transparent",
@@ -65,7 +84,7 @@ export default function MusicMap({ data }: Props) {
       borderWidth: 0,
       padding: 0,
       extraCssText:
-        "box-shadow: none; border: none; pointer-events: none; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); ",
+        "box-shadow: none; border: none; pointer-events: none; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 12px;",
       formatter: (params: any) => {
         const item = params.data;
         return `
@@ -76,7 +95,7 @@ export default function MusicMap({ data }: Props) {
             <p class="text-xs text-gray-600 font-medium leading-none">
               ${item[4]} &mdash; ${item[5]}
             </p>
-            <div class=""flex flex-row items-start>
+            <div class="flex flex-row items-start gap-1">
               <div class="mt-1 inline-flex items-center px-2 py-0.5 rounded-full bg-black/5 w-fit">
                 <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
                   Cluster ${item[3]}
@@ -92,16 +111,8 @@ export default function MusicMap({ data }: Props) {
         `;
       },
     },
-    xAxis: {
-      type: "value",
-      show: false,
-      scale: true,
-    },
-    yAxis: {
-      type: "value",
-      show: false,
-      scale: true,
-    },
+    xAxis: { type: "value", show: false, scale: true },
+    yAxis: { type: "value", show: false, scale: true },
     dataZoom: [
       {
         type: "inside",
@@ -109,8 +120,6 @@ export default function MusicMap({ data }: Props) {
         zoomOnMouseWheel: true,
         moveOnMouseMove: true,
         filterMode: "none",
-        start: 30,
-        end: 50,
       },
       {
         type: "inside",
@@ -118,25 +127,51 @@ export default function MusicMap({ data }: Props) {
         zoomOnMouseWheel: true,
         moveOnMouseMove: true,
         filterMode: "none",
-        start: 30,
-        end: 50,
       },
     ],
     series: series,
-    grid: {
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
+    grid: { top: 0, left: 0, right: 0, bottom: 0 },
+  };
+
+  // 4. Handle clicks on the data points
+  const onEvents = {
+    click: (params: any) => {
+      if (params.componentType === "series") {
+        const clickedData = params.data;
+        const clickedGroupId =
+          colorMode === "cluster" ? clickedData[3] : clickedData[6];
+
+        setSelectedGroup((prev) =>
+          prev === String(clickedGroupId) ? null : String(clickedGroupId),
+        );
+      }
     },
+  };
+
+  const handleChartReady = (echartsInstance: any) => {
+    echartsInstance.setOption({
+      dataZoom: [
+        { start: 30, end: 50 },
+        { start: 30, end: 50 },
+      ],
+    });
+
+    // Allow users to clear the selection by clicking the empty background
+    echartsInstance.getZr().on("click", (event: any) => {
+      // If event.target is undefined, the user clicked empty canvas space
+      if (!event.target) {
+        setSelectedGroup(null);
+      }
+    });
   };
 
   return (
     <div className="w-full h-full">
       <ReactECharts
         option={options}
+        onEvents={onEvents}
+        onChartReady={handleChartReady}
         style={{ height: "100%", width: "100%" }}
-        notMerge={true}
       />
     </div>
   );
