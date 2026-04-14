@@ -102,23 +102,23 @@ export default function MusicMap({ data, colorMode }: Props) {
       formatter: (params: any) => {
         const item = params.data;
         return `
-           <div class="flex flex-col gap-1.5 p-3 backdrop-blur-sm rounded-xl shadow-2xl border border-gray-300" style="pointer-events: auto;">
+           <div class="flex flex-col gap-1.5 p-3 bg-white rounded-xl shadow-2xl border border-gray-300" style="pointer-events: auto;">
             <h3 class="text-sm font-semibold text-gray-900 tracking-tight leading-none">
               ${item[2]}
             </h3>
             <p class="text-xs text-gray-600 font-medium leading-none">
-              ${item[4]} &mdash; ${item[5]}
+              ${item[4].split(";").join(", ")}
             </p>
             <div class="flex flex-row items-start gap-1">
               <div class="mt-1 inline-flex items-center px-2 py-0.5 rounded-full bg-black/5 w-fit">
-                <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
-                  Cluster ${item[3]}
-                </span>
+          <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+            Cluster ${item[3]}
+          </span>
               </div>
               <div class="mt-1 inline-flex items-center px-2 py-0.5 rounded-full bg-black/5 w-fit">
-                <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
-                  ${item[6]}
-                </span>
+          <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
+            ${item[6]}
+          </span>
               </div>
             </div>
           </div>
