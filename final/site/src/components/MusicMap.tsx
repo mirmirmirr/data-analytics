@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import ReactECharts from "echarts-for-react";
 import * as echarts from "echarts";
 import type { Song } from "@/types/song";
+import SongGlyph from "@/components/SongGlyph";
 
 type Props = {
   data: Song[];
@@ -10,16 +11,26 @@ type Props = {
 
 export default function MusicMap({ data, colorMode }: Props) {
   const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
+  const [activeTrackId, setActiveTrackId] = useState<string | null>(null);
+
+  // Add state to track if the user's mouse is inside the drawer
+  const [isDrawerHovered, setIsDrawerHovered] = useState(false);
 
   /* REFS SETUP FOR SYNCHRONIZATION */
   const mainMapRef = useRef<ReactECharts>(null);
   const zoomBoxRef = useRef<HTMLDivElement>(null);
   const minimapAreaRef = useRef<HTMLDivElement>(null);
 
-  // Refs for viewport dragging math
+  //  Add a ref to track the hover timeout
+  const hoverIntentTimeout = useRef<NodeJS.Timeout | null>(null);
+
   const isDraggingViewport = useRef(false);
   const dragStartMouse = useRef({ x: 0, y: 0 });
   const dragStartZoom = useRef({ xStart: 0, xEnd: 0, yStart: 0, yEnd: 0 });
+
+  const activeSong = activeTrackId
+    ? data.find((d) => d.track_id === activeTrackId)
+    : null;
 
   useEffect(() => {
     setSelectedGroup(null);
@@ -67,6 +78,7 @@ export default function MusicMap({ data, colorMode }: Props) {
         d.artists,
         d.album_name,
         d.track_genre,
+        d.track_id,
       ]),
       symbolSize: 10,
       large: true,
@@ -116,22 +128,14 @@ export default function MusicMap({ data, colorMode }: Props) {
         const item = params.data;
         return `
            <div class="flex flex-col gap-1.5 p-3 bg-gray-surface/80 backdrop-blur-md rounded-xl border border-gray-track shadow-xl" style="pointer-events: auto;">
-            <h3 class="text-sm font-semibold text-white tracking-tight leading-none">
-              ${item[2]}
-            </h3>
-            <p class="text-xs text-white font-medium leading-none">
-              ${item[4].split(";").join(", ")}
-            </p>
+            <h3 class="text-sm font-semibold text-white tracking-tight leading-none">${item[2]}</h3>
+            <p class="text-xs text-white font-medium leading-none">${item[4].split(";").join(", ")}</p>
             <div>
               <div class="mt-1 inline-flex items-center px-2 py-0.5 rounded-full bg-blue-8/75 w-fit">
-                <span class="text-[10px] text-white uppercase tracking-wider">
-                  Cluster ${item[3]}
-                </span>
+                <span class="text-[10px] text-white uppercase tracking-wider">Cluster ${item[3]}</span>
               </div>
               <div class="mt-1 inline-flex items-center px-2 py-0.5 rounded-full bg-blue-8/75 w-fit">
-                <span class="text-[10px] text-white uppercase tracking-wider">
-                  ${item[6]}
-                </span>
+                <span class="text-[10px] text-white uppercase tracking-wider">${item[6]}</span>
               </div>
             </div>
           </div>
@@ -176,6 +180,29 @@ export default function MusicMap({ data, colorMode }: Props) {
   };
 
   const onMainEvents = {
+    // 👇 3. Update mouseover with Intent Delay and Drawer Lock
+    mouseover: (params: any) => {
+      // If the user's mouse is currently inside the right-side drawer, ignore map hovers entirely
+      if (isDrawerHovered) return;
+
+      if (params.componentType === "series") {
+        // Clear any existing timeout so we don't queue up multiple updates
+        if (hoverIntentTimeout.current)
+          clearTimeout(hoverIntentTimeout.current);
+
+        // Set a 150ms delay. If they cross a point faster than this, nothing happens!
+        hoverIntentTimeout.current = setTimeout(() => {
+          setActiveTrackId(params.data[7]);
+        }, 150);
+      }
+    },
+    // Cancel the timeout if the mouse leaves the point before 150ms
+    mouseout: (params: any) => {
+      if (params.componentType === "series") {
+        if (hoverIntentTimeout.current)
+          clearTimeout(hoverIntentTimeout.current);
+      }
+    },
     click: (params: any) => {
       if (params.componentType === "series") {
         const clickedData = params.data;
@@ -186,10 +213,8 @@ export default function MusicMap({ data, colorMode }: Props) {
         );
       }
     },
-    // Direction 1: Main Map updates the Box
     dataZoom: (params: any, echartsInstance: any) => {
       if (isDraggingViewport.current) return;
-
       const dz = echartsInstance.getOption().dataZoom;
       if (dz && dz.length >= 2 && zoomBoxRef.current) {
         zoomBoxRef.current.style.left = `${dz[0].start}%`;
@@ -207,39 +232,33 @@ export default function MusicMap({ data, colorMode }: Props) {
         { start: 30, end: 50 },
       ],
     });
-
     if (zoomBoxRef.current) {
       zoomBoxRef.current.style.left = "30%";
       zoomBoxRef.current.style.width = "20%";
       zoomBoxRef.current.style.bottom = "30%";
       zoomBoxRef.current.style.height = "20%";
     }
-
     echartsInstance.getZr().on("click", (event: any) => {
-      if (!event.target) setSelectedGroup(null);
+      if (!event.target) {
+        setSelectedGroup(null);
+        setActiveTrackId(null);
+      }
     });
   };
 
   const onViewportDragStart = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!mainMapRef.current || !minimapAreaRef.current) return;
-
     isDraggingViewport.current = true;
-
-    // Save starting mouse position
     dragStartMouse.current = { x: e.clientX, y: e.clientY };
-
-    // Get exact current zoom bounds from the main ECharts instance
     const echartsInstance = mainMapRef.current.getEchartsInstance();
     const dz = echartsInstance.getOption().dataZoom as any[];
-
     dragStartZoom.current = {
       xStart: dz[0].start,
       xEnd: dz[0].end,
       yStart: dz[1].start,
       yEnd: dz[1].end,
     };
-
     window.addEventListener("mousemove", onViewportDragMove);
     window.addEventListener("mouseup", onViewportDragEnd);
   };
@@ -347,6 +366,72 @@ export default function MusicMap({ data, colorMode }: Props) {
             onMouseDown={onViewportDragStart}
             className="absolute border-[1.5px] border-blue-8 bg-blue-surface/30 rounded-lg cursor-grab active:cursor-grabbing hover:bg-blue-10/30 transition-colors pointer-events-auto"
           />
+        </div>
+      </div>
+
+      {/* 👇 5. Attach mouse events to the drawer itself */}
+      <div
+        onMouseEnter={() => setIsDrawerHovered(true)}
+        onMouseLeave={() => setIsDrawerHovered(false)}
+        className={`absolute top-0 right-0 h-full w-80 bg-[#121212]/95 backdrop-blur-2xl border-l border-gray-track shadow-2xl z-30 transition-transform duration-300 ease-in-out flex flex-col ${
+          activeTrackId ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="p-6 flex flex-col h-full gap-6 relative">
+          <div className="flex justify-between items-center">
+            <h2 className="text-white font-semibold text-lg tracking-tight">
+              Track Details
+            </h2>
+            <button
+              onClick={() => {
+                setActiveTrackId(null);
+                setIsDrawerHovered(false); // Reset lock if manually closed
+              }}
+              className="text-gray-400 hover:text-white transition-colors p-1"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+
+          {activeSong && (
+            <div className="w-full mt-2 flex flex-col gap-6">
+              {/* Glyph Container */}
+              <div className="flex justify-center items-center  rounded-xl border border-white/5 shadow-inner">
+                <SongGlyph song={activeSong} size={250} />
+              </div>
+
+              <iframe
+                style={{ borderRadius: "12px" }}
+                src={`https://open.spotify.com/embed/track/${activeTrackId}?utm_source=generator&theme=0`}
+                width="100%"
+                height="352"
+                frameBorder="0"
+                allowFullScreen={false}
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                className="shadow-lg"
+              ></iframe>
+            </div>
+          )}
+
+          <div className="mt-auto pb-4">
+            <p className="text-xs text-gray-500 text-center">
+              Data provided by Spotify API
+            </p>
+          </div>
         </div>
       </div>
     </div>

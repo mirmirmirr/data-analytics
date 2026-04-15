@@ -4,8 +4,6 @@ import type { Song } from "@/types/song";
 
 export default function App() {
   const [data, setData] = useState<Song[]>([]);
-
-  // 👈 Add state to track the active mode
   const [colorMode, setColorMode] = useState<"cluster" | "genre">("cluster");
 
   const screenRef = useRef<HTMLDivElement>(null);
