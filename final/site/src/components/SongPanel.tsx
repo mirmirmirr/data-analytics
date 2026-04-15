@@ -1,27 +1,6 @@
 import type { Song } from "@/types/song";
 import GlyphPanel from "@/components/GlyphPanel";
-import { valenceToColor } from "@/utils/glyps";
-
-// Helper function to determine if text should be light or dark based on the background color
-function getContrastTextColor(hexColor: string) {
-  if (!hexColor) return "#FFFFFF";
-
-  const hex = hexColor.replace("#", "");
-  const fullHex =
-    hex.length === 3
-      ? hex
-          .split("")
-          .map((c) => c + c)
-          .join("")
-      : hex;
-
-  const r = parseInt(fullHex.substring(0, 2), 16);
-  const g = parseInt(fullHex.substring(2, 4), 16);
-  const b = parseInt(fullHex.substring(4, 6), 16);
-
-  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
-  return yiq >= 128 ? "#121212" : "#FFFFFF";
-}
+import GroupPanel from "@/components/GroupPanel";
 
 type Props = {
   activeTrackId: string | null;
@@ -36,12 +15,6 @@ export default function SidePanel({
   onMouseEnter,
   onMouseLeave,
 }: Props) {
-  const songColor = valenceToColor(
-    activeSong ? activeSong.valence : 0,
-    activeSong ? activeSong.energy : 0,
-  );
-  const textColor = getContrastTextColor(songColor);
-
   return (
     <div
       onMouseEnter={onMouseEnter}
@@ -51,31 +24,16 @@ export default function SidePanel({
       {activeTrackId && activeSong ? (
         <div className="py-4 pl-4 pr-2 flex flex-col gap-4 relative h-full overflow-y-auto">
           <div className="flex gap-2">
-            <button className="relative mt-1 inline-flex items-center px-2.5 py-1 rounded-full overflow-hidden group cursor-pointer">
-              <div
-                className="absolute inset-0 opacity-70 group-hover:opacity-100 transition-opacity duration-200"
-                style={{ backgroundColor: songColor }}
-              />
-              <span
-                className="relative z-10 text-[10px] uppercase tracking-wider font-bold"
-                style={{ color: textColor }}
-              >
-                Cluster {activeSong.cluster}
-              </span>
-            </button>
-
-            <button className="relative mt-1 inline-flex items-center px-2.5 py-1 rounded-full overflow-hidden group cursor-pointer">
-              <div
-                className="absolute inset-0 opacity-70 group-hover:opacity-100 transition-opacity duration-200"
-                style={{ backgroundColor: songColor }}
-              />
-              <span
-                className="relative z-10 text-[10px] uppercase tracking-wider font-bold"
-                style={{ color: textColor }}
-              >
-                {activeSong.track_genre}
-              </span>
-            </button>
+            <GroupPanel
+              type="cluster"
+              label={"Cluster " + activeSong.cluster}
+              activeSong={activeSong}
+            />
+            <GroupPanel
+              type="genre"
+              label={activeSong.track_genre}
+              activeSong={activeSong}
+            />
           </div>
 
           <div className="w-full flex flex-col gap-6">

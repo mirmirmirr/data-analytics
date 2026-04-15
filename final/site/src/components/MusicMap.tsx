@@ -102,7 +102,7 @@ export default function MusicMap({ data, colorMode }: Props) {
     backgroundColor: "transparent",
     xAxis: { type: "value", show: false, scale: true },
     yAxis: { type: "value", show: false, scale: true },
-    grid: { top: 0, left: 260, right: 360, bottom: 0 },
+    grid: { top: 0, left: 200, right: 360, bottom: 0 },
     dataZoom: [
       {
         id: "zoomX",
@@ -294,7 +294,6 @@ export default function MusicMap({ data, colorMode }: Props) {
         style={{ height: "100%", width: "100%" }}
       />
 
-      {/* 👇 1. Shifted minimap to left-6 */}
       <div className="absolute bottom-6 left-6 w-40 h-40 bg-gray-1/90 backdrop-blur-md rounded-xl border border-gray-track shadow-xl z-10 hidden sm:block p-2">
         <div ref={minimapAreaRef} className="relative w-full h-full">
           <div className="absolute inset-0 pointer-events-none">

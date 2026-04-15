@@ -16,8 +16,8 @@ export default function LegendPanel({
   colorMode,
 }: Props) {
   return (
-    <div className="absolute left-6 bottom-50 w-40 bg-gray-1 rounded-2xl z-20 flex flex-col h-fit p-4">
-      <h3 className="text-white font-semibold">
+    <div className="absolute left-6 bottom-50 w-40 bg-gray-1 rounded-2xl z-20 flex flex-col h-fit p-4 gap-2">
+      <h3 className="text-gray-12 font-semibold text-start pl-2">
         {colorMode === "cluster" ? "Clusters" : "Genres"}
       </h3>
 
@@ -43,7 +43,7 @@ export default function LegendPanel({
                 className="w-3 h-3 rounded-full shrink-0"
                 style={{ backgroundColor: color }}
               />
-              <span className="text-xs font-medium text-gray-200 truncate">
+              <span className="text-xs font-medium text-gray-11 truncate">
                 {colorMode === "cluster" ? "Cluster " : ""}
                 {groupId}
               </span>

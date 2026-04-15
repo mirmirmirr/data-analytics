@@ -156,3 +156,30 @@ export_data <- song_sample |>
   )
 
 write_json(export_data, "songs.json", pretty = TRUE)
+
+export_data <- genre_profiles |>
+  slice_head(n = 10) |>
+  select(
+    track_genre,
+    energy_mean,
+    danceability_mean,
+    valence_mean,
+    tempo_mean,
+    acousticness_mean,
+    instrumentalness_mean
+  )
+
+write_json(export_data, "genre.json", pretty = TRUE)
+
+export_data <- cluster_profiles |>
+  select(
+    cluster,
+    energy_mean,
+    danceability_mean,
+    valence_mean,
+    tempo_mean,
+    acousticness_mean,
+    instrumentalness_mean
+  )
+
+write_json(export_data, "cluster.json", pretty = TRUE)

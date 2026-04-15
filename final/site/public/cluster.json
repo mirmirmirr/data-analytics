@@ -1,0 +1,92 @@
+[
+  {
+    "cluster": "10",
+    "energy_mean": 0.3885,
+    "danceability_mean": 0.7481,
+    "valence_mean": 0.5083,
+    "tempo_mean": 114.9426,
+    "acousticness_mean": 0.6755,
+    "instrumentalness_mean": 0.023
+  },
+  {
+    "cluster": "2",
+    "energy_mean": 0.5673,
+    "danceability_mean": 0.7081,
+    "valence_mean": 0.3214,
+    "tempo_mean": 117.7627,
+    "acousticness_mean": 0.1802,
+    "instrumentalness_mean": 0.0124
+  },
+  {
+    "cluster": "3",
+    "energy_mean": 0.7503,
+    "danceability_mean": 0.7495,
+    "valence_mean": 0.7281,
+    "tempo_mean": 113.6607,
+    "acousticness_mean": 0.1775,
+    "instrumentalness_mean": 0.0071
+  },
+  {
+    "cluster": "5",
+    "energy_mean": 0.4427,
+    "danceability_mean": 0.4871,
+    "valence_mean": 0.3494,
+    "tempo_mean": 151.3466,
+    "acousticness_mean": 0.6595,
+    "instrumentalness_mean": 0.0146
+  },
+  {
+    "cluster": "7",
+    "energy_mean": 0.6508,
+    "danceability_mean": 0.5896,
+    "valence_mean": 0.647,
+    "tempo_mean": 96.323,
+    "acousticness_mean": 0.5413,
+    "instrumentalness_mean": 0.0035
+  },
+  {
+    "cluster": "9",
+    "energy_mean": 0.3971,
+    "danceability_mean": 0.5081,
+    "valence_mean": 0.2723,
+    "tempo_mean": 92.0293,
+    "acousticness_mean": 0.6728,
+    "instrumentalness_mean": 0.015
+  },
+  {
+    "cluster": "4",
+    "energy_mean": 0.3587,
+    "danceability_mean": 0.5712,
+    "valence_mean": 0.2674,
+    "tempo_mean": 112.8084,
+    "acousticness_mean": 0.623,
+    "instrumentalness_mean": 0.821
+  },
+  {
+    "cluster": "8",
+    "energy_mean": 0.812,
+    "danceability_mean": 0.5124,
+    "valence_mean": 0.4237,
+    "tempo_mean": 101.0774,
+    "acousticness_mean": 0.0751,
+    "instrumentalness_mean": 0.0174
+  },
+  {
+    "cluster": "6",
+    "energy_mean": 0.824,
+    "danceability_mean": 0.4079,
+    "valence_mean": 0.3675,
+    "tempo_mean": 159.7726,
+    "acousticness_mean": 0.0515,
+    "instrumentalness_mean": 0.0279
+  },
+  {
+    "cluster": "1",
+    "energy_mean": 0.768,
+    "danceability_mean": 0.6064,
+    "valence_mean": 0.6717,
+    "tempo_mean": 158.6127,
+    "acousticness_mean": 0.229,
+    "instrumentalness_mean": 0.0071
+  }
+]

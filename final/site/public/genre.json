@@ -1,0 +1,1028 @@
+[
+  {
+    "track_genre": "pop-film",
+    "energy_mean": 0.6046,
+    "danceability_mean": 0.5971,
+    "valence_mean": 0.5293,
+    "tempo_mean": 117.2575,
+    "acousticness_mean": 0.4407,
+    "instrumentalness_mean": 0.0081
+  },
+  {
+    "track_genre": "k-pop",
+    "energy_mean": 0.6757,
+    "danceability_mean": 0.6477,
+    "valence_mean": 0.5569,
+    "tempo_mean": 119.244,
+    "acousticness_mean": 0.293,
+    "instrumentalness_mean": 0.0098
+  },
+  {
+    "track_genre": "chill",
+    "energy_mean": 0.4267,
+    "danceability_mean": 0.6643,
+    "valence_mean": 0.4038,
+    "tempo_mean": 115.4794,
+    "acousticness_mean": 0.5341,
+    "instrumentalness_mean": 0.178
+  },
+  {
+    "track_genre": "sad",
+    "energy_mean": 0.4625,
+    "danceability_mean": 0.6924,
+    "valence_mean": 0.422,
+    "tempo_mean": 119.0649,
+    "acousticness_mean": 0.4737,
+    "instrumentalness_mean": 0.1057
+  },
+  {
+    "track_genre": "grunge",
+    "energy_mean": 0.8033,
+    "danceability_mean": 0.4571,
+    "valence_mean": 0.4004,
+    "tempo_mean": 129.3492,
+    "acousticness_mean": 0.0534,
+    "instrumentalness_mean": 0.037
+  },
+  {
+    "track_genre": "indian",
+    "energy_mean": 0.5671,
+    "danceability_mean": 0.5923,
+    "valence_mean": 0.463,
+    "tempo_mean": 116.143,
+    "acousticness_mean": 0.4849,
+    "instrumentalness_mean": 0.0394
+  },
+  {
+    "track_genre": "anime",
+    "energy_mean": 0.6741,
+    "danceability_mean": 0.5375,
+    "valence_mean": 0.4345,
+    "tempo_mean": 123.5296,
+    "acousticness_mean": 0.2677,
+    "instrumentalness_mean": 0.263
+  },
+  {
+    "track_genre": "sertanejo",
+    "energy_mean": 0.7104,
+    "danceability_mean": 0.5916,
+    "valence_mean": 0.6193,
+    "tempo_mean": 127.0522,
+    "acousticness_mean": 0.4366,
+    "instrumentalness_mean": 0.0002
+  },
+  {
+    "track_genre": "emo",
+    "energy_mean": 0.673,
+    "danceability_mean": 0.5977,
+    "valence_mean": 0.4412,
+    "tempo_mean": 127.075,
+    "acousticness_mean": 0.1921,
+    "instrumentalness_mean": 0.0303
+  },
+  {
+    "track_genre": "pop",
+    "energy_mean": 0.6064,
+    "danceability_mean": 0.6304,
+    "valence_mean": 0.5062,
+    "tempo_mean": 120.9271,
+    "acousticness_mean": 0.3437,
+    "instrumentalness_mean": 0.009
+  },
+  {
+    "track_genre": "progressive-house",
+    "energy_mean": 0.8134,
+    "danceability_mean": 0.6239,
+    "valence_mean": 0.3653,
+    "tempo_mean": 125.0936,
+    "acousticness_mean": 0.0614,
+    "instrumentalness_mean": 0.2005
+  },
+  {
+    "track_genre": "piano",
+    "energy_mean": 0.3201,
+    "danceability_mean": 0.4551,
+    "valence_mean": 0.3133,
+    "tempo_mean": 118.0847,
+    "acousticness_mean": 0.705,
+    "instrumentalness_mean": 0.5164
+  },
+  {
+    "track_genre": "mandopop",
+    "energy_mean": 0.4984,
+    "danceability_mean": 0.5465,
+    "valence_mean": 0.3502,
+    "tempo_mean": 123.4759,
+    "acousticness_mean": 0.4803,
+    "instrumentalness_mean": 0.0037
+  },
+  {
+    "track_genre": "deep-house",
+    "energy_mean": 0.7419,
+    "danceability_mean": 0.7104,
+    "valence_mean": 0.4473,
+    "tempo_mean": 120.8749,
+    "acousticness_mean": 0.1015,
+    "instrumentalness_mean": 0.2376
+  },
+  {
+    "track_genre": "brazil",
+    "energy_mean": 0.6207,
+    "danceability_mean": 0.5629,
+    "valence_mean": 0.4698,
+    "tempo_mean": 121.9356,
+    "acousticness_mean": 0.3324,
+    "instrumentalness_mean": 0.0131
+  },
+  {
+    "track_genre": "electronic",
+    "energy_mean": 0.6948,
+    "danceability_mean": 0.6529,
+    "valence_mean": 0.3918,
+    "tempo_mean": 122.9478,
+    "acousticness_mean": 0.177,
+    "instrumentalness_mean": 0.2487
+  },
+  {
+    "track_genre": "pagode",
+    "energy_mean": 0.7121,
+    "danceability_mean": 0.5777,
+    "valence_mean": 0.688,
+    "tempo_mean": 126.8593,
+    "acousticness_mean": 0.5384,
+    "instrumentalness_mean": 0.0006
+  },
+  {
+    "track_genre": "ambient",
+    "energy_mean": 0.2372,
+    "danceability_mean": 0.3679,
+    "valence_mean": 0.1675,
+    "tempo_mean": 111.1131,
+    "acousticness_mean": 0.7768,
+    "instrumentalness_mean": 0.6762
+  },
+  {
+    "track_genre": "british",
+    "energy_mean": 0.5071,
+    "danceability_mean": 0.5013,
+    "valence_mean": 0.4397,
+    "tempo_mean": 118.8286,
+    "acousticness_mean": 0.4279,
+    "instrumentalness_mean": 0.1937
+  },
+  {
+    "track_genre": "metal",
+    "energy_mean": 0.8403,
+    "danceability_mean": 0.4643,
+    "valence_mean": 0.4179,
+    "tempo_mean": 127.9075,
+    "acousticness_mean": 0.0371,
+    "instrumentalness_mean": 0.0646
+  },
+  {
+    "track_genre": "metalcore",
+    "energy_mean": 0.9145,
+    "danceability_mean": 0.4238,
+    "valence_mean": 0.3149,
+    "tempo_mean": 130.5802,
+    "acousticness_mean": 0.0103,
+    "instrumentalness_mean": 0.0457
+  },
+  {
+    "track_genre": "psych-rock",
+    "energy_mean": 0.5615,
+    "danceability_mean": 0.5026,
+    "valence_mean": 0.5647,
+    "tempo_mean": 121.573,
+    "acousticness_mean": 0.3152,
+    "instrumentalness_mean": 0.0918
+  },
+  {
+    "track_genre": "hard-rock",
+    "energy_mean": 0.795,
+    "danceability_mean": 0.4822,
+    "valence_mean": 0.5144,
+    "tempo_mean": 125.3818,
+    "acousticness_mean": 0.0904,
+    "instrumentalness_mean": 0.0496
+  },
+  {
+    "track_genre": "acoustic",
+    "energy_mean": 0.4354,
+    "danceability_mean": 0.5496,
+    "valence_mean": 0.424,
+    "tempo_mean": 119.0106,
+    "acousticness_mean": 0.5668,
+    "instrumentalness_mean": 0.0383
+  },
+  {
+    "track_genre": "dubstep",
+    "energy_mean": 0.759,
+    "danceability_mean": 0.5181,
+    "valence_mean": 0.2717,
+    "tempo_mean": 133.6317,
+    "acousticness_mean": 0.1136,
+    "instrumentalness_mean": 0.0931
+  },
+  {
+    "track_genre": "world-music",
+    "energy_mean": 0.533,
+    "danceability_mean": 0.4146,
+    "valence_mean": 0.2503,
+    "tempo_mean": 121.3937,
+    "acousticness_mean": 0.2995,
+    "instrumentalness_mean": 0.0918
+  },
+  {
+    "track_genre": "forro",
+    "energy_mean": 0.7895,
+    "danceability_mean": 0.6498,
+    "valence_mean": 0.7607,
+    "tempo_mean": 140.3622,
+    "acousticness_mean": 0.3976,
+    "instrumentalness_mean": 0.0013
+  },
+  {
+    "track_genre": "gospel",
+    "energy_mean": 0.5763,
+    "danceability_mean": 0.4733,
+    "valence_mean": 0.3206,
+    "tempo_mean": 125.6251,
+    "acousticness_mean": 0.3769,
+    "instrumentalness_mean": 0.0033
+  },
+  {
+    "track_genre": "j-pop",
+    "energy_mean": 0.6796,
+    "danceability_mean": 0.5517,
+    "valence_mean": 0.5416,
+    "tempo_mean": 124.6131,
+    "acousticness_mean": 0.2821,
+    "instrumentalness_mean": 0.0116
+  },
+  {
+    "track_genre": "french",
+    "energy_mean": 0.595,
+    "danceability_mean": 0.6515,
+    "valence_mean": 0.4299,
+    "tempo_mean": 117.8201,
+    "acousticness_mean": 0.3497,
+    "instrumentalness_mean": 0.1588
+  },
+  {
+    "track_genre": "garage",
+    "energy_mean": 0.7444,
+    "danceability_mean": 0.4843,
+    "valence_mean": 0.518,
+    "tempo_mean": 127.0482,
+    "acousticness_mean": 0.1675,
+    "instrumentalness_mean": 0.1899
+  },
+  {
+    "track_genre": "mpb",
+    "energy_mean": 0.5798,
+    "danceability_mean": 0.5741,
+    "valence_mean": 0.5564,
+    "tempo_mean": 120.1611,
+    "acousticness_mean": 0.4209,
+    "instrumentalness_mean": 0.0155
+  },
+  {
+    "track_genre": "turkish",
+    "energy_mean": 0.6098,
+    "danceability_mean": 0.6161,
+    "valence_mean": 0.4623,
+    "tempo_mean": 120.3676,
+    "acousticness_mean": 0.3211,
+    "instrumentalness_mean": 0.0356
+  },
+  {
+    "track_genre": "j-rock",
+    "energy_mean": 0.7607,
+    "danceability_mean": 0.5091,
+    "valence_mean": 0.5377,
+    "tempo_mean": 128.5224,
+    "acousticness_mean": 0.1686,
+    "instrumentalness_mean": 0.0235
+  },
+  {
+    "track_genre": "indie-pop",
+    "energy_mean": 0.5611,
+    "danceability_mean": 0.6044,
+    "valence_mean": 0.4606,
+    "tempo_mean": 120.179,
+    "acousticness_mean": 0.3724,
+    "instrumentalness_mean": 0.0419
+  },
+  {
+    "track_genre": "dub",
+    "energy_mean": 0.7148,
+    "danceability_mean": 0.5753,
+    "valence_mean": 0.3867,
+    "tempo_mean": 129.4506,
+    "acousticness_mean": 0.1224,
+    "instrumentalness_mean": 0.0885
+  },
+  {
+    "track_genre": "techno",
+    "energy_mean": 0.7464,
+    "danceability_mean": 0.6843,
+    "valence_mean": 0.3219,
+    "tempo_mean": 128.2555,
+    "acousticness_mean": 0.0814,
+    "instrumentalness_mean": 0.54
+  },
+  {
+    "track_genre": "indie",
+    "energy_mean": 0.5562,
+    "danceability_mean": 0.5873,
+    "valence_mean": 0.468,
+    "tempo_mean": 119.0935,
+    "acousticness_mean": 0.3804,
+    "instrumentalness_mean": 0.0528
+  },
+  {
+    "track_genre": "samba",
+    "energy_mean": 0.6726,
+    "danceability_mean": 0.5749,
+    "valence_mean": 0.6934,
+    "tempo_mean": 118.1224,
+    "acousticness_mean": 0.4899,
+    "instrumentalness_mean": 0.0074
+  },
+  {
+    "track_genre": "punk",
+    "energy_mean": 0.8097,
+    "danceability_mean": 0.4998,
+    "valence_mean": 0.5556,
+    "tempo_mean": 133.6005,
+    "acousticness_mean": 0.0891,
+    "instrumentalness_mean": 0.0389
+  },
+  {
+    "track_genre": "punk-rock",
+    "energy_mean": 0.81,
+    "danceability_mean": 0.5073,
+    "valence_mean": 0.567,
+    "tempo_mean": 132.219,
+    "acousticness_mean": 0.0826,
+    "instrumentalness_mean": 0.0322
+  },
+  {
+    "track_genre": "folk",
+    "energy_mean": 0.5458,
+    "danceability_mean": 0.5585,
+    "valence_mean": 0.4906,
+    "tempo_mean": 118.4695,
+    "acousticness_mean": 0.4753,
+    "instrumentalness_mean": 0.0377
+  },
+  {
+    "track_genre": "spanish",
+    "energy_mean": 0.7078,
+    "danceability_mean": 0.6043,
+    "valence_mean": 0.5485,
+    "tempo_mean": 122.8324,
+    "acousticness_mean": 0.2688,
+    "instrumentalness_mean": 0.0173
+  },
+  {
+    "track_genre": "groove",
+    "energy_mean": 0.7636,
+    "danceability_mean": 0.5839,
+    "valence_mean": 0.4265,
+    "tempo_mean": 123.7392,
+    "acousticness_mean": 0.1316,
+    "instrumentalness_mean": 0.1455
+  },
+  {
+    "track_genre": "singer-songwriter",
+    "energy_mean": 0.4342,
+    "danceability_mean": 0.562,
+    "valence_mean": 0.4143,
+    "tempo_mean": 119.7373,
+    "acousticness_mean": 0.5528,
+    "instrumentalness_mean": 0.0279
+  },
+  {
+    "track_genre": "songwriter",
+    "energy_mean": 0.4342,
+    "danceability_mean": 0.562,
+    "valence_mean": 0.4143,
+    "tempo_mean": 119.7373,
+    "acousticness_mean": 0.5528,
+    "instrumentalness_mean": 0.0279
+  },
+  {
+    "track_genre": "trance",
+    "energy_mean": 0.8453,
+    "danceability_mean": 0.5834,
+    "valence_mean": 0.2769,
+    "tempo_mean": 133.2767,
+    "acousticness_mean": 0.0359,
+    "instrumentalness_mean": 0.4235
+  },
+  {
+    "track_genre": "hip-hop",
+    "energy_mean": 0.6834,
+    "danceability_mean": 0.7361,
+    "valence_mean": 0.5518,
+    "tempo_mean": 116.7679,
+    "acousticness_mean": 0.1927,
+    "instrumentalness_mean": 0.0109
+  },
+  {
+    "track_genre": "swedish",
+    "energy_mean": 0.622,
+    "danceability_mean": 0.5904,
+    "valence_mean": 0.5329,
+    "tempo_mean": 121.0945,
+    "acousticness_mean": 0.3242,
+    "instrumentalness_mean": 0.0222
+  },
+  {
+    "track_genre": "r-n-b",
+    "energy_mean": 0.6381,
+    "danceability_mean": 0.6144,
+    "valence_mean": 0.6332,
+    "tempo_mean": 124.0389,
+    "acousticness_mean": 0.3706,
+    "instrumentalness_mean": 0.01
+  },
+  {
+    "track_genre": "synth-pop",
+    "energy_mean": 0.7131,
+    "danceability_mean": 0.6207,
+    "valence_mean": 0.5864,
+    "tempo_mean": 122.85,
+    "acousticness_mean": 0.1523,
+    "instrumentalness_mean": 0.0823
+  },
+  {
+    "track_genre": "hardcore",
+    "energy_mean": 0.8425,
+    "danceability_mean": 0.5464,
+    "valence_mean": 0.4963,
+    "tempo_mean": 125.3761,
+    "acousticness_mean": 0.0649,
+    "instrumentalness_mean": 0.0689
+  },
+  {
+    "track_genre": "electro",
+    "energy_mean": 0.665,
+    "danceability_mean": 0.6517,
+    "valence_mean": 0.4667,
+    "tempo_mean": 120.8351,
+    "acousticness_mean": 0.2276,
+    "instrumentalness_mean": 0.0377
+  },
+  {
+    "track_genre": "ska",
+    "energy_mean": 0.7931,
+    "danceability_mean": 0.5807,
+    "valence_mean": 0.6967,
+    "tempo_mean": 128.3383,
+    "acousticness_mean": 0.1216,
+    "instrumentalness_mean": 0.0301
+  },
+  {
+    "track_genre": "sleep",
+    "energy_mean": 0.3421,
+    "danceability_mean": 0.1679,
+    "valence_mean": 0.0582,
+    "tempo_mean": 84.6195,
+    "acousticness_mean": 0.6573,
+    "instrumentalness_mean": 0.7235
+  },
+  {
+    "track_genre": "children",
+    "energy_mean": 0.4946,
+    "danceability_mean": 0.7165,
+    "valence_mean": 0.6943,
+    "tempo_mean": 123.3412,
+    "acousticness_mean": 0.4987,
+    "instrumentalness_mean": 0.0606
+  },
+  {
+    "track_genre": "edm",
+    "energy_mean": 0.7562,
+    "danceability_mean": 0.6482,
+    "valence_mean": 0.4652,
+    "tempo_mean": 122.0373,
+    "acousticness_mean": 0.1143,
+    "instrumentalness_mean": 0.0401
+  },
+  {
+    "track_genre": "cantopop",
+    "energy_mean": 0.4617,
+    "danceability_mean": 0.5479,
+    "valence_mean": 0.3936,
+    "tempo_mean": 124.2773,
+    "acousticness_mean": 0.5363,
+    "instrumentalness_mean": 0.0126
+  },
+  {
+    "track_genre": "trip-hop",
+    "energy_mean": 0.6224,
+    "danceability_mean": 0.6347,
+    "valence_mean": 0.4781,
+    "tempo_mean": 118.7436,
+    "acousticness_mean": 0.2256,
+    "instrumentalness_mean": 0.3838
+  },
+  {
+    "track_genre": "rock-n-roll",
+    "energy_mean": 0.5266,
+    "danceability_mean": 0.5503,
+    "valence_mean": 0.6705,
+    "tempo_mean": 120.39,
+    "acousticness_mean": 0.5533,
+    "instrumentalness_mean": 0.0142
+  },
+  {
+    "track_genre": "house",
+    "energy_mean": 0.7551,
+    "danceability_mean": 0.6685,
+    "valence_mean": 0.4947,
+    "tempo_mean": 121.107,
+    "acousticness_mean": 0.1087,
+    "instrumentalness_mean": 0.038
+  },
+  {
+    "track_genre": "minimal-techno",
+    "energy_mean": 0.6803,
+    "danceability_mean": 0.7294,
+    "valence_mean": 0.2836,
+    "tempo_mean": 124.748,
+    "acousticness_mean": 0.0709,
+    "instrumentalness_mean": 0.7445
+  },
+  {
+    "track_genre": "alt-rock",
+    "energy_mean": 0.7542,
+    "danceability_mean": 0.5345,
+    "valence_mean": 0.5183,
+    "tempo_mean": 124.6344,
+    "acousticness_mean": 0.1222,
+    "instrumentalness_mean": 0.0541
+  },
+  {
+    "track_genre": "disco",
+    "energy_mean": 0.7376,
+    "danceability_mean": 0.6767,
+    "valence_mean": 0.6708,
+    "tempo_mean": 121.9744,
+    "acousticness_mean": 0.1662,
+    "instrumentalness_mean": 0.081
+  },
+  {
+    "track_genre": "dancehall",
+    "energy_mean": 0.6853,
+    "danceability_mean": 0.7342,
+    "valence_mean": 0.629,
+    "tempo_mean": 112.91,
+    "acousticness_mean": 0.2155,
+    "instrumentalness_mean": 0.0071
+  },
+  {
+    "track_genre": "club",
+    "energy_mean": 0.7217,
+    "danceability_mean": 0.6034,
+    "valence_mean": 0.3682,
+    "tempo_mean": 123.3013,
+    "acousticness_mean": 0.1594,
+    "instrumentalness_mean": 0.3478
+  },
+  {
+    "track_genre": "funk",
+    "energy_mean": 0.633,
+    "danceability_mean": 0.6782,
+    "valence_mean": 0.5997,
+    "tempo_mean": 117.7558,
+    "acousticness_mean": 0.2997,
+    "instrumentalness_mean": 0.0078
+  },
+  {
+    "track_genre": "death-metal",
+    "energy_mean": 0.9315,
+    "danceability_mean": 0.3684,
+    "valence_mean": 0.2476,
+    "tempo_mean": 123.779,
+    "acousticness_mean": 0.0067,
+    "instrumentalness_mean": 0.2757
+  },
+  {
+    "track_genre": "rockabilly",
+    "energy_mean": 0.6594,
+    "danceability_mean": 0.5612,
+    "valence_mean": 0.727,
+    "tempo_mean": 123.6606,
+    "acousticness_mean": 0.447,
+    "instrumentalness_mean": 0.0252
+  },
+  {
+    "track_genre": "show-tunes",
+    "energy_mean": 0.3987,
+    "danceability_mean": 0.4637,
+    "valence_mean": 0.3788,
+    "tempo_mean": 114.3722,
+    "acousticness_mean": 0.6372,
+    "instrumentalness_mean": 0.0379
+  },
+  {
+    "track_genre": "blues",
+    "energy_mean": 0.5819,
+    "danceability_mean": 0.5686,
+    "valence_mean": 0.604,
+    "tempo_mean": 116.5684,
+    "acousticness_mean": 0.3981,
+    "instrumentalness_mean": 0.0341
+  },
+  {
+    "track_genre": "industrial",
+    "energy_mean": 0.8617,
+    "danceability_mean": 0.5304,
+    "valence_mean": 0.4249,
+    "tempo_mean": 126.8312,
+    "acousticness_mean": 0.0367,
+    "instrumentalness_mean": 0.192
+  },
+  {
+    "track_genre": "malay",
+    "energy_mean": 0.5784,
+    "danceability_mean": 0.6286,
+    "valence_mean": 0.5015,
+    "tempo_mean": 119.3148,
+    "acousticness_mean": 0.4041,
+    "instrumentalness_mean": 0.0089
+  },
+  {
+    "track_genre": "guitar",
+    "energy_mean": 0.325,
+    "danceability_mean": 0.54,
+    "valence_mean": 0.4323,
+    "tempo_mean": 112.0002,
+    "acousticness_mean": 0.7731,
+    "instrumentalness_mean": 0.5162
+  },
+  {
+    "track_genre": "new-age",
+    "energy_mean": 0.2145,
+    "danceability_mean": 0.3485,
+    "valence_mean": 0.1832,
+    "tempo_mean": 107.9587,
+    "acousticness_mean": 0.824,
+    "instrumentalness_mean": 0.713
+  },
+  {
+    "track_genre": "goth",
+    "energy_mean": 0.741,
+    "danceability_mean": 0.4789,
+    "valence_mean": 0.4435,
+    "tempo_mean": 124.2676,
+    "acousticness_mean": 0.1641,
+    "instrumentalness_mean": 0.1194
+  },
+  {
+    "track_genre": "salsa",
+    "energy_mean": 0.7245,
+    "danceability_mean": 0.6683,
+    "valence_mean": 0.8148,
+    "tempo_mean": 119.9151,
+    "acousticness_mean": 0.4692,
+    "instrumentalness_mean": 0.0125
+  },
+  {
+    "track_genre": "disney",
+    "energy_mean": 0.3025,
+    "danceability_mean": 0.4629,
+    "valence_mean": 0.3686,
+    "tempo_mean": 112.0609,
+    "acousticness_mean": 0.7429,
+    "instrumentalness_mean": 0.3836
+  },
+  {
+    "track_genre": "power-pop",
+    "energy_mean": 0.8017,
+    "danceability_mean": 0.4734,
+    "valence_mean": 0.6146,
+    "tempo_mean": 134.6516,
+    "acousticness_mean": 0.0855,
+    "instrumentalness_mean": 0.0639
+  },
+  {
+    "track_genre": "german",
+    "energy_mean": 0.5317,
+    "danceability_mean": 0.5243,
+    "valence_mean": 0.3791,
+    "tempo_mean": 117.5035,
+    "acousticness_mean": 0.3818,
+    "instrumentalness_mean": 0.2889
+  },
+  {
+    "track_genre": "drum-and-bass",
+    "energy_mean": 0.8766,
+    "danceability_mean": 0.5355,
+    "valence_mean": 0.3215,
+    "tempo_mean": 155.2417,
+    "acousticness_mean": 0.0259,
+    "instrumentalness_mean": 0.3714
+  },
+  {
+    "track_genre": "j-dance",
+    "energy_mean": 0.7038,
+    "danceability_mean": 0.6806,
+    "valence_mean": 0.5644,
+    "tempo_mean": 114.9159,
+    "acousticness_mean": 0.2305,
+    "instrumentalness_mean": 0.0307
+  },
+  {
+    "track_genre": "hardstyle",
+    "energy_mean": 0.9012,
+    "danceability_mean": 0.5392,
+    "valence_mean": 0.3119,
+    "tempo_mean": 146.8375,
+    "acousticness_mean": 0.0511,
+    "instrumentalness_mean": 0.1427
+  },
+  {
+    "track_genre": "heavy-metal",
+    "energy_mean": 0.874,
+    "danceability_mean": 0.4285,
+    "valence_mean": 0.3882,
+    "tempo_mean": 126.6139,
+    "acousticness_mean": 0.015,
+    "instrumentalness_mean": 0.0826
+  },
+  {
+    "track_genre": "study",
+    "energy_mean": 0.4107,
+    "danceability_mean": 0.6852,
+    "valence_mean": 0.4027,
+    "tempo_mean": 111.7638,
+    "acousticness_mean": 0.5306,
+    "instrumentalness_mean": 0.7898
+  },
+  {
+    "track_genre": "bluegrass",
+    "energy_mean": 0.5303,
+    "danceability_mean": 0.5347,
+    "valence_mean": 0.6351,
+    "tempo_mean": 126.5788,
+    "acousticness_mean": 0.5566,
+    "instrumentalness_mean": 0.1368
+  },
+  {
+    "track_genre": "latino",
+    "energy_mean": 0.7318,
+    "danceability_mean": 0.7571,
+    "valence_mean": 0.6302,
+    "tempo_mean": 119.3852,
+    "acousticness_mean": 0.1722,
+    "instrumentalness_mean": 0.0081
+  },
+  {
+    "track_genre": "j-idol",
+    "energy_mean": 0.8687,
+    "danceability_mean": 0.5488,
+    "valence_mean": 0.5775,
+    "tempo_mean": 136.112,
+    "acousticness_mean": 0.1515,
+    "instrumentalness_mean": 0.0372
+  },
+  {
+    "track_genre": "comedy",
+    "energy_mean": 0.6999,
+    "danceability_mean": 0.5772,
+    "valence_mean": 0.4548,
+    "tempo_mean": 100.9956,
+    "acousticness_mean": 0.7265,
+    "instrumentalness_mean": 0.0005
+  },
+  {
+    "track_genre": "opera",
+    "energy_mean": 0.3171,
+    "danceability_mean": 0.3136,
+    "valence_mean": 0.2152,
+    "tempo_mean": 105.5846,
+    "acousticness_mean": 0.7949,
+    "instrumentalness_mean": 0.1629
+  },
+  {
+    "track_genre": "afrobeat",
+    "energy_mean": 0.7028,
+    "danceability_mean": 0.6696,
+    "valence_mean": 0.6986,
+    "tempo_mean": 119.2133,
+    "acousticness_mean": 0.2709,
+    "instrumentalness_mean": 0.2535
+  },
+  {
+    "track_genre": "alternative",
+    "energy_mean": 0.72,
+    "danceability_mean": 0.5599,
+    "valence_mean": 0.4956,
+    "tempo_mean": 122.2324,
+    "acousticness_mean": 0.1478,
+    "instrumentalness_mean": 0.0382
+  },
+  {
+    "track_genre": "reggaeton",
+    "energy_mean": 0.7387,
+    "danceability_mean": 0.7585,
+    "valence_mean": 0.6428,
+    "tempo_mean": 118.8724,
+    "acousticness_mean": 0.1648,
+    "instrumentalness_mean": 0.0028
+  },
+  {
+    "track_genre": "dance",
+    "energy_mean": 0.7086,
+    "danceability_mean": 0.6879,
+    "valence_mean": 0.5525,
+    "tempo_mean": 120.1283,
+    "acousticness_mean": 0.1312,
+    "instrumentalness_mean": 0.0084
+  },
+  {
+    "track_genre": "black-metal",
+    "energy_mean": 0.8749,
+    "danceability_mean": 0.2964,
+    "valence_mean": 0.1917,
+    "tempo_mean": 128.6015,
+    "acousticness_mean": 0.0271,
+    "instrumentalness_mean": 0.4408
+  },
+  {
+    "track_genre": "happy",
+    "energy_mean": 0.911,
+    "danceability_mean": 0.5528,
+    "valence_mean": 0.3275,
+    "tempo_mean": 152.909,
+    "acousticness_mean": 0.0572,
+    "instrumentalness_mean": 0.2636
+  },
+  {
+    "track_genre": "party",
+    "energy_mean": 0.8712,
+    "danceability_mean": 0.6672,
+    "valence_mean": 0.6812,
+    "tempo_mean": 131.3003,
+    "acousticness_mean": 0.0927,
+    "instrumentalness_mean": 0.0017
+  },
+  {
+    "track_genre": "reggae",
+    "energy_mean": 0.7258,
+    "danceability_mean": 0.7453,
+    "valence_mean": 0.6475,
+    "tempo_mean": 119.8676,
+    "acousticness_mean": 0.176,
+    "instrumentalness_mean": 0.0028
+  },
+  {
+    "track_genre": "breakbeat",
+    "energy_mean": 0.8533,
+    "danceability_mean": 0.6462,
+    "valence_mean": 0.4747,
+    "tempo_mean": 133.0302,
+    "acousticness_mean": 0.0314,
+    "instrumentalness_mean": 0.3959
+  },
+  {
+    "track_genre": "tango",
+    "energy_mean": 0.3728,
+    "danceability_mean": 0.5379,
+    "valence_mean": 0.5835,
+    "tempo_mean": 114.5543,
+    "acousticness_mean": 0.8462,
+    "instrumentalness_mean": 0.1397
+  },
+  {
+    "track_genre": "soul",
+    "energy_mean": 0.5339,
+    "danceability_mean": 0.6001,
+    "valence_mean": 0.5233,
+    "tempo_mean": 114.6292,
+    "acousticness_mean": 0.4016,
+    "instrumentalness_mean": 0.0136
+  },
+  {
+    "track_genre": "rock",
+    "energy_mean": 0.6791,
+    "danceability_mean": 0.5436,
+    "valence_mean": 0.5389,
+    "tempo_mean": 126.3212,
+    "acousticness_mean": 0.2092,
+    "instrumentalness_mean": 0.021
+  },
+  {
+    "track_genre": "country",
+    "energy_mean": 0.5968,
+    "danceability_mean": 0.5553,
+    "valence_mean": 0.5215,
+    "tempo_mean": 123.9633,
+    "acousticness_mean": 0.3212,
+    "instrumentalness_mean": 0.0056
+  },
+  {
+    "track_genre": "honky-tonk",
+    "energy_mean": 0.367,
+    "danceability_mean": 0.5712,
+    "valence_mean": 0.6316,
+    "tempo_mean": 116.5569,
+    "acousticness_mean": 0.712,
+    "instrumentalness_mean": 0.0571
+  },
+  {
+    "track_genre": "idm",
+    "energy_mean": 0.5554,
+    "danceability_mean": 0.5278,
+    "valence_mean": 0.3025,
+    "tempo_mean": 123.2974,
+    "acousticness_mean": 0.3777,
+    "instrumentalness_mean": 0.6749
+  },
+  {
+    "track_genre": "kids",
+    "energy_mean": 0.6131,
+    "danceability_mean": 0.7789,
+    "valence_mean": 0.6809,
+    "tempo_mean": 121.7507,
+    "acousticness_mean": 0.2386,
+    "instrumentalness_mean": 0.0197
+  },
+  {
+    "track_genre": "grindcore",
+    "energy_mean": 0.9242,
+    "danceability_mean": 0.2719,
+    "valence_mean": 0.2164,
+    "tempo_mean": 119.2299,
+    "acousticness_mean": 0.0087,
+    "instrumentalness_mean": 0.5385
+  },
+  {
+    "track_genre": "jazz",
+    "energy_mean": 0.353,
+    "danceability_mean": 0.51,
+    "valence_mean": 0.4903,
+    "tempo_mean": 112.6365,
+    "acousticness_mean": 0.7158,
+    "instrumentalness_mean": 0.0796
+  },
+  {
+    "track_genre": "classical",
+    "energy_mean": 0.1898,
+    "danceability_mean": 0.3819,
+    "valence_mean": 0.3811,
+    "tempo_mean": 107.9498,
+    "acousticness_mean": 0.92,
+    "instrumentalness_mean": 0.6192
+  },
+  {
+    "track_genre": "chicago-house",
+    "energy_mean": 0.7332,
+    "danceability_mean": 0.7662,
+    "valence_mean": 0.5865,
+    "tempo_mean": 123.9227,
+    "acousticness_mean": 0.0353,
+    "instrumentalness_mean": 0.4828
+  },
+  {
+    "track_genre": "detroit-techno",
+    "energy_mean": 0.7105,
+    "danceability_mean": 0.7226,
+    "valence_mean": 0.4692,
+    "tempo_mean": 126.5922,
+    "acousticness_mean": 0.0656,
+    "instrumentalness_mean": 0.6995
+  },
+  {
+    "track_genre": "latin",
+    "energy_mean": 0.7271,
+    "danceability_mean": 0.7219,
+    "valence_mean": 0.6311,
+    "tempo_mean": 119.8123,
+    "acousticness_mean": 0.1834,
+    "instrumentalness_mean": 0.0092
+  },
+  {
+    "track_genre": "romance",
+    "energy_mean": 0.2943,
+    "danceability_mean": 0.4321,
+    "valence_mean": 0.3934,
+    "tempo_mean": 109.6931,
+    "acousticness_mean": 0.8695,
+    "instrumentalness_mean": 0.0538
+  },
+  {
+    "track_genre": "iranian",
+    "energy_mean": 0.5458,
+    "danceability_mean": 0.3007,
+    "valence_mean": 0.1535,
+    "tempo_mean": 114.7694,
+    "acousticness_mean": 0.4109,
+    "instrumentalness_mean": 0.5898
+  }
+]
