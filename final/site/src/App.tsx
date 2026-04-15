@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import MusicMap from "@/components/MusicMap";
 import type { Song } from "@/types/song";
 
@@ -16,28 +17,31 @@ export default function App() {
 
   return (
     <div ref={screenRef} className="relative h-full w-full">
-      <div className="absolute top-6 right-6 z-10 bg-gray-1 backdrop-blur-md p-1 rounded-lg shadow-sm border border-gray-indicator flex gap-1">
-        <button
-          onClick={() => setColorMode("cluster")}
-          className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
-            colorMode === "cluster"
-              ? "bg-blue-8 shadow-sm text-white"
-              : "border-gray-indicator hover:text-white text-gray-8"
-          }`}
+      <ToggleGroup.Root
+        type="single"
+        value={colorMode}
+        onValueChange={(value) => {
+          if (value) setColorMode(value as "cluster" | "genre");
+        }}
+        className="absolute top-6 left-6 z-10 bg-gray-3 backdrop-blur-md p-1 rounded-lg shadow-sm flex gap-1"
+        aria-label="Color mode"
+      >
+        <ToggleGroup.Item
+          value="cluster"
+          aria-label="Color by cluster"
+          className="px-4 py-2 text-xs font-medium rounded-md transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-8 data-[state=on]:bg-blue-8 data-[state=on]:shadow-sm data-[state=on]:text-white data-[state=off]:text-gray-10 data-[state=off]:hover:text-gray-11"
         >
-          By Cluster
-        </button>
-        <button
-          onClick={() => setColorMode("genre")}
-          className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
-            colorMode === "genre"
-              ? "bg-blue-8 shadow-sm text-white"
-              : "border-gray-indicator hover:text-white text-gray-8"
-          }`}
+          Cluster
+        </ToggleGroup.Item>
+
+        <ToggleGroup.Item
+          value="genre"
+          aria-label="Color by genre"
+          className="px-4 py-2 text-xs font-medium rounded-md transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-8 data-[state=on]:bg-blue-8 data-[state=on]:shadow-sm data-[state=on]:text-white data-[state=off]:text-gray-10 data-[state=off]:hover:text-gray-11"
         >
-          By Genre
-        </button>
-      </div>
+          Genre
+        </ToggleGroup.Item>
+      </ToggleGroup.Root>
 
       {data.length > 0 && <MusicMap data={data} colorMode={colorMode} />}
     </div>

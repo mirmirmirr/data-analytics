@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import ReactECharts from "echarts-for-react";
 import * as echarts from "echarts";
 import type { Song } from "@/types/song";
-import SongGlyph from "@/components/SongGlyph";
-import SongDrawer from "@/components/SongDrawer";
+import SidePanel from "@/components/SongPanel";
+// 👇 Import the new Legend component
+import LegendPanel from "@/components/Legend";
 
 type Props = {
   data: Song[];
@@ -13,16 +14,11 @@ type Props = {
 export default function MusicMap({ data, colorMode }: Props) {
   const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
   const [activeTrackId, setActiveTrackId] = useState<string | null>(null);
-
-  // Add state to track if the user's mouse is inside the drawer
   const [isDrawerHovered, setIsDrawerHovered] = useState(false);
 
-  /* REFS SETUP FOR SYNCHRONIZATION */
   const mainMapRef = useRef<ReactECharts>(null);
   const zoomBoxRef = useRef<HTMLDivElement>(null);
   const minimapAreaRef = useRef<HTMLDivElement>(null);
-
-  //  Add a ref to track the hover timeout
   const hoverIntentTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const isDraggingViewport = useRef(false);
@@ -105,18 +101,6 @@ export default function MusicMap({ data, colorMode }: Props) {
   const mainOptions: echarts.EChartsOption = {
     animation: false,
     backgroundColor: "transparent",
-    legend: {
-      show: true,
-      backgroundColor: "#121212",
-      padding: 15,
-      borderRadius: 8,
-      type: "scroll",
-      orient: "vertical",
-      left: 20,
-      top: "middle",
-      icon: "circle",
-      textStyle: { color: "#F5f5f5", fontSize: 12, fontWeight: 500 },
-    },
     tooltip: {
       trigger: "item",
       backgroundColor: "transparent",
@@ -145,7 +129,7 @@ export default function MusicMap({ data, colorMode }: Props) {
     },
     xAxis: { type: "value", show: false, scale: true },
     yAxis: { type: "value", show: false, scale: true },
-    grid: { top: 0, left: 140, right: 0, bottom: 0 },
+    grid: { top: 0, left: 260, right: 360, bottom: 0 },
     dataZoom: [
       {
         id: "zoomX",
@@ -181,23 +165,16 @@ export default function MusicMap({ data, colorMode }: Props) {
   };
 
   const onMainEvents = {
-    // 👇 3. Update mouseover with Intent Delay and Drawer Lock
     mouseover: (params: any) => {
-      // If the user's mouse is currently inside the right-side drawer, ignore map hovers entirely
       if (isDrawerHovered) return;
-
       if (params.componentType === "series") {
-        // Clear any existing timeout so we don't queue up multiple updates
         if (hoverIntentTimeout.current)
           clearTimeout(hoverIntentTimeout.current);
-
-        // Set a 150ms delay. If they cross a point faster than this, nothing happens!
         hoverIntentTimeout.current = setTimeout(() => {
           setActiveTrackId(params.data[7]);
         }, 150);
       }
     },
-    // Cancel the timeout if the mouse leaves the point before 150ms
     mouseout: (params: any) => {
       if (params.componentType === "series") {
         if (hoverIntentTimeout.current)
@@ -272,28 +249,21 @@ export default function MusicMap({ data, colorMode }: Props) {
     )
       return;
 
-    // Calculate how many pixels the mouse moved
     const deltaX = e.clientX - dragStartMouse.current.x;
     const deltaY = e.clientY - dragStartMouse.current.y;
-
-    // Convert pixels to percentages based on the minimap's width/height
     const minimapWidth = minimapAreaRef.current.clientWidth;
     const minimapHeight = minimapAreaRef.current.clientHeight;
 
     const percentDeltaX = (deltaX / minimapWidth) * 100;
-
-    // ECharts Y-axis is inverted (0 is bottom, 100 is top), so we invert deltaY
     const percentDeltaY = -(deltaY / minimapHeight) * 100;
 
     const startZoom = dragStartZoom.current;
 
-    // Calculate new bounds
     let newXStart = startZoom.xStart + percentDeltaX;
     let newXEnd = startZoom.xEnd + percentDeltaX;
     let newYStart = startZoom.yStart + percentDeltaY;
     let newYEnd = startZoom.yEnd + percentDeltaY;
 
-    // Clamp values so you can't drag the box off the edge of the minimap
     const xRange = startZoom.xEnd - startZoom.xStart;
     if (newXStart < 0) {
       newXStart = 0;
@@ -314,13 +284,11 @@ export default function MusicMap({ data, colorMode }: Props) {
       newYStart = 100 - yRange;
     }
 
-    // Update the visual box immediately for 0-lag feedback
     if (zoomBoxRef.current) {
       zoomBoxRef.current.style.left = `${newXStart}%`;
       zoomBoxRef.current.style.bottom = `${newYStart}%`;
     }
 
-    // Tell the main map to pan to these new coordinates!
     mainMapRef.current.getEchartsInstance().dispatchAction({
       type: "dataZoom",
       batch: [
@@ -353,7 +321,8 @@ export default function MusicMap({ data, colorMode }: Props) {
         style={{ height: "100%", width: "100%" }}
       />
 
-      <div className="absolute bottom-6 right-6 w-56 h-48 bg-gray-surface/80 backdrop-blur-md rounded-xl border border-gray-track shadow-xl z-10 hidden sm:block p-2">
+      {/* 👇 1. Shifted minimap to left-6 */}
+      <div className="absolute bottom-6 left-6 w-40 h-40 bg-gray-1/90 backdrop-blur-md rounded-xl border border-gray-track shadow-xl z-10 hidden sm:block p-2">
         <div ref={minimapAreaRef} className="relative w-full h-full">
           <div className="absolute inset-0 pointer-events-none">
             <ReactECharts
@@ -370,13 +339,19 @@ export default function MusicMap({ data, colorMode }: Props) {
         </div>
       </div>
 
-      <SongDrawer
+      {/* 👇 2. Added the new Legend Panel */}
+      <LegendPanel
+        uniqueGroups={uniqueGroups}
+        colors={colors}
+        selectedGroup={selectedGroup}
+        setSelectedGroup={setSelectedGroup}
+        colorMode={colorMode}
+      />
+
+      {/* 👇 3. Updated Side Panel placement */}
+      <SidePanel
         activeTrackId={activeTrackId}
         activeSong={activeSong}
-        onClose={() => {
-          setActiveTrackId(null);
-          setIsDrawerHovered(false);
-        }}
         onMouseEnter={() => setIsDrawerHovered(true)}
         onMouseLeave={() => setIsDrawerHovered(false)}
       />

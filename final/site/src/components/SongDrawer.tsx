@@ -20,7 +20,7 @@ export default function SongDrawer({
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={`absolute top-0 right-0 h-full w-80 bg-[#121212]/95 backdrop-blur-2xl border-l border-gray-track shadow-2xl z-30 transition-transform duration-300 ease-in-out flex flex-col overflow-y-auto ${
+      className={`absolute top-0 right-0 h-full w-80 bg-gray-1 backdrop-blur-2xl border-l border-gray-track shadow-2xl z-30 transition-transform duration-300 ease-in-out flex flex-col overflow-y-auto ${
         activeTrackId ? "translate-x-0" : "translate-x-full"
       }`}
     >
