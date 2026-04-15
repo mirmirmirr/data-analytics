@@ -3,7 +3,6 @@ import ReactECharts from "echarts-for-react";
 import * as echarts from "echarts";
 import type { Song } from "@/types/song";
 import SidePanel from "@/components/SongPanel";
-// 👇 Import the new Legend component
 import LegendPanel from "@/components/Legend";
 
 type Props = {
@@ -86,7 +85,7 @@ export default function MusicMap({ data, colorMode }: Props) {
       },
       emphasis: {
         scale: true,
-        focus: "self",
+        // focus: "self",
         itemStyle: {
           opacity: 1,
           borderColor: activeColor,
