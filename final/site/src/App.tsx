@@ -18,14 +18,13 @@ export default function App() {
 
   return (
     <div ref={screenRef} className="relative h-full w-full">
-      {/* 👈 Toggle UI overlay */}
-      <div className="absolute top-6 right-6 z-10 bg-white/80 backdrop-blur-md p-1 rounded-lg shadow-sm border border-gray-200 flex gap-1">
+      <div className="absolute top-6 right-6 z-10 bg-gray-1 backdrop-blur-md p-1 rounded-lg shadow-sm border border-gray-indicator flex gap-1">
         <button
           onClick={() => setColorMode("cluster")}
           className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
             colorMode === "cluster"
-              ? "bg-white shadow-sm text-gray-900"
-              : "text-gray-500 hover:text-gray-900"
+              ? "bg-blue-8 shadow-sm text-white"
+              : "border-gray-indicator hover:text-white text-gray-8"
           }`}
         >
           By Cluster
@@ -34,8 +33,8 @@ export default function App() {
           onClick={() => setColorMode("genre")}
           className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
             colorMode === "genre"
-              ? "bg-white shadow-sm text-gray-900"
-              : "text-gray-500 hover:text-gray-900"
+              ? "bg-blue-8 shadow-sm text-white"
+              : "border-gray-indicator hover:text-white text-gray-8"
           }`}
         >
           By Genre

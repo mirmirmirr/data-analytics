@@ -72,10 +72,20 @@ export default function MusicMap({ data, colorMode }: Props) {
       large: true,
       largeThreshold: 2000,
       itemStyle: {
-        color: isDimmed ? "#CECECE" : activeColor,
-        opacity: isDimmed ? 0.15 : 0.8,
+        color: isDimmed ? "#313131" : activeColor,
+        opacity: isDimmed ? 0.15 : 0.7,
       },
-      emphasis: { scale: true, itemStyle: { opacity: 1 } },
+      emphasis: {
+        scale: true,
+        focus: "self",
+        itemStyle: {
+          opacity: 1,
+          borderColor: activeColor,
+          borderWidth: 14,
+          shadowBlur: 12,
+          shadowColor: "rgba(0, 0, 0, 0.4)",
+        },
+      },
     };
   });
 
@@ -84,12 +94,15 @@ export default function MusicMap({ data, colorMode }: Props) {
     backgroundColor: "transparent",
     legend: {
       show: true,
+      backgroundColor: "#121212",
+      padding: 15,
+      borderRadius: 8,
       type: "scroll",
       orient: "vertical",
-      left: 16,
+      left: 20,
       top: "middle",
       icon: "circle",
-      textStyle: { color: "#4B5563", fontSize: 12, fontWeight: 500 },
+      textStyle: { color: "#F5f5f5", fontSize: 12, fontWeight: 500 },
     },
     tooltip: {
       trigger: "item",
@@ -102,23 +115,23 @@ export default function MusicMap({ data, colorMode }: Props) {
       formatter: (params: any) => {
         const item = params.data;
         return `
-           <div class="flex flex-col gap-1.5 p-3 bg-white rounded-xl shadow-2xl border border-gray-300" style="pointer-events: auto;">
-            <h3 class="text-sm font-semibold text-gray-900 tracking-tight leading-none">
+           <div class="flex flex-col gap-1.5 p-3 bg-gray-surface/80 backdrop-blur-md rounded-xl border border-gray-track shadow-xl" style="pointer-events: auto;">
+            <h3 class="text-sm font-semibold text-white tracking-tight leading-none">
               ${item[2]}
             </h3>
-            <p class="text-xs text-gray-600 font-medium leading-none">
+            <p class="text-xs text-white font-medium leading-none">
               ${item[4].split(";").join(", ")}
             </p>
-            <div class="flex flex-row items-start gap-1">
-              <div class="mt-1 inline-flex items-center px-2 py-0.5 rounded-full bg-black/5 w-fit">
-          <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
-            Cluster ${item[3]}
-          </span>
+            <div>
+              <div class="mt-1 inline-flex items-center px-2 py-0.5 rounded-full bg-blue-8/75 w-fit">
+                <span class="text-[10px] text-white uppercase tracking-wider">
+                  Cluster ${item[3]}
+                </span>
               </div>
-              <div class="mt-1 inline-flex items-center px-2 py-0.5 rounded-full bg-black/5 w-fit">
-          <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
-            ${item[6]}
-          </span>
+              <div class="mt-1 inline-flex items-center px-2 py-0.5 rounded-full bg-blue-8/75 w-fit">
+                <span class="text-[10px] text-white uppercase tracking-wider">
+                  ${item[6]}
+                </span>
               </div>
             </div>
           </div>
@@ -320,7 +333,7 @@ export default function MusicMap({ data, colorMode }: Props) {
         style={{ height: "100%", width: "100%" }}
       />
 
-      <div className="absolute bottom-6 right-6 w-56 h-48 bg-white/80 backdrop-blur-md rounded-xl border border-gray-200 shadow-xl z-10 hidden sm:block p-2">
+      <div className="absolute bottom-6 right-6 w-56 h-48 bg-gray-surface/80 backdrop-blur-md rounded-xl border border-gray-track shadow-xl z-10 hidden sm:block p-2">
         <div ref={minimapAreaRef} className="relative w-full h-full">
           <div className="absolute inset-0 pointer-events-none">
             <ReactECharts
@@ -332,7 +345,7 @@ export default function MusicMap({ data, colorMode }: Props) {
           <div
             ref={zoomBoxRef}
             onMouseDown={onViewportDragStart}
-            className="absolute border-[1.5px] border-indigo-600 bg-indigo-500/20 rounded cursor-grab active:cursor-grabbing hover:bg-indigo-500/30 transition-colors pointer-events-auto"
+            className="absolute border-[1.5px] border-blue-8 bg-blue-surface/30 rounded-lg cursor-grab active:cursor-grabbing hover:bg-blue-10/30 transition-colors pointer-events-auto"
           />
         </div>
       </div>

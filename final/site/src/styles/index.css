@@ -1,15 +1,53 @@
 @import "tailwindcss";
 
+@theme {
+  --color-white: #f5f5f5;
+  --color-black: #000000;
+
+  --color-gray-1: #121212;
+  --color-gray-2: #1a1a1a;
+  --color-gray-3: #232323;
+  --color-gray-4: #2a2a2a;
+  --color-gray-5: #313131;
+  --color-gray-6: #3a3a3a;
+  --color-gray-7: #484848;
+  --color-gray-8: #616161;
+  --color-gray-9: #6f6f6f;
+  --color-gray-10: #7c7c7c;
+  --color-gray-11: #b4b4b4;
+  --color-gray-12: #eee;
+
+  --color-gray-contrast: #ffffff;
+  --color-gray-surface: rgba(0, 0, 0, 0.05);
+  --color-gray-indicator: #6f6f6f;
+  --color-gray-track: #6f6f6f;
+
+  --color-blue-1: #0a1220;
+  --color-blue-2: #0f1829;
+  --color-blue-3: #0e254f;
+  --color-blue-4: #0b2d6d;
+  --color-blue-5: #123881;
+  --color-blue-6: #1c4593;
+  --color-blue-7: #2553aa;
+  --color-blue-8: #2d63ca;
+  --color-blue-9: #2654ab;
+  --color-blue-10: #1c4694;
+  --color-blue-11: #83b4ff;
+  --color-blue-12: #cde2ff;
+
+  --color-blue-contrast: #fff;
+  --color-blue-surface: #0d1e4080;
+  --color-blue-indicator: #2654ab;
+  --color-blue-track: #2654ab;
+}
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #f5f5f5;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
+  /* --text: #6b6375; */
+  /* --text-h: #08060d; */
+  /* --bg: var(--color-black); */
+  --border: var(--color-gray-7);
+  --code-bg: var(--color-gray-1);
+  --accent: var(--color-blue-11);
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
@@ -20,32 +58,12 @@
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  color: var(--color-white);
+  background: var(--color-black);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
 }
 
 #root {
