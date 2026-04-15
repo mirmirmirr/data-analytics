@@ -101,32 +101,6 @@ export default function MusicMap({ data, colorMode }: Props) {
   const mainOptions: echarts.EChartsOption = {
     animation: false,
     backgroundColor: "transparent",
-    tooltip: {
-      trigger: "item",
-      backgroundColor: "transparent",
-      borderColor: "transparent",
-      borderWidth: 0,
-      padding: 0,
-      extraCssText:
-        "box-shadow: none; border: none; pointer-events: none; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 12px;",
-      formatter: (params: any) => {
-        const item = params.data;
-        return `
-           <div class="flex flex-col gap-1.5 p-3 bg-gray-surface/80 backdrop-blur-md rounded-xl border border-gray-track shadow-xl" style="pointer-events: auto;">
-            <h3 class="text-sm font-semibold text-white tracking-tight leading-none">${item[2]}</h3>
-            <p class="text-xs text-white font-medium leading-none">${item[4].split(";").join(", ")}</p>
-            <div>
-              <div class="mt-1 inline-flex items-center px-2 py-0.5 rounded-full bg-blue-8/75 w-fit">
-                <span class="text-[10px] text-white uppercase tracking-wider">Cluster ${item[3]}</span>
-              </div>
-              <div class="mt-1 inline-flex items-center px-2 py-0.5 rounded-full bg-blue-8/75 w-fit">
-                <span class="text-[10px] text-white uppercase tracking-wider">${item[6]}</span>
-              </div>
-            </div>
-          </div>
-        `;
-      },
-    },
     xAxis: { type: "value", show: false, scale: true },
     yAxis: { type: "value", show: false, scale: true },
     grid: { top: 0, left: 260, right: 360, bottom: 0 },
