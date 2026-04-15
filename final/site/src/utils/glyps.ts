@@ -1,8 +1,11 @@
 // 🎨 Valence → Color
-export function valenceToColor(valence: number) {
-  // blue (220) → yellow (60)
-  const hue = 220 - valence * 160;
-  return `hsl(${hue}, 80%, 60%)`;
+export function valenceToColor(valence: number, energy = 0): string {
+  const hue = 240 - valence * 180;
+
+  const saturation = 60 + energy * 30; // more energy = richer color
+  const lightness = 35 + energy * 25;
+
+  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
 
 // 🎧 Tempo → number of lines

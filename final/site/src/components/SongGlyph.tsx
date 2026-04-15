@@ -14,7 +14,7 @@ export default function SongGlyph({ song, size = 120 }: Props) {
   const rng = seedrandom(song.track_id);
 
   // 🎨 Encodings
-  const color = valenceToColor(song.valence);
+  const color = valenceToColor(song.valence, song.energy);
   const lines = tempoToLines(song.tempo);
 
   const maxLength = size * (0.25 + song.energy * 0.35);
