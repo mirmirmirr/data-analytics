@@ -94,26 +94,33 @@ export default function SidePanel({
           </div>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center h-full p-8 text-center opacity-50">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mb-4 text-gray-400"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 16v-4" />
-            <path d="M12 8h.01" />
-          </svg>
-          <p className="text-sm text-gray-300 font-medium">
-            Hover over a point on the map to explore track details.
+        <div className="flex flex-col h-full p-8 text-start">
+          <h3 className="text-3xl font-bold text-white tracking-tight">
+            Music Map
+          </h3>
+          <p className="text-sm text-gray-11">
+            Music isn’t organized in neat categories—it exists on a spectrum.
           </p>
+          <section className="mt-4 flex flex-col gap-4">
+            <p className="text-sm text-gray-11">
+              This map visualizes songs based on their audio features, placing
+              similar tracks closer together to reveal hidden patterns in sound.
+            </p>
+            <ul className="text-sm text-gray-11 flex flex-col gap-2">
+              <li>
+                <b className="text-white">Clusters</b> group songs by their
+                actual characteristics, showing natural structures in the data.
+              </li>
+              <li>
+                <b className="text-white">Genres</b> overlay traditional labels,
+                exposing where those categories align—or break down.
+              </li>
+            </ul>
+            <p className="text-sm text-gray-11 italic">
+              Hover to explore individual tracks and see how they fit within
+              this evolving landscape of music.
+            </p>
+          </section>
         </div>
       )}
     </div>
