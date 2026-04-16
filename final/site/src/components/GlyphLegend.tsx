@@ -1,33 +1,24 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import type { Song } from "@/types/types";
-import SongGlyph from "@/components/glyph/SongGlyph";
 import { cn } from "@/utils/classname";
-import { Cross1Icon } from "@radix-ui/react-icons";
+import { Cross1Icon, InfoCircledIcon } from "@radix-ui/react-icons";
 
-type GlyphPanelProps = {
-  song: Song;
-};
-
-export default function GlyphPanel({ song }: GlyphPanelProps) {
+export default function GlyphLegend({ asIcon = false }: { asIcon?: boolean }) {
   return (
     <Dialog.Root>
-      <div className="flex flex-col bg-gray-3 rounded-xl p-6 gap-4 w-full">
-        <div className="flex justify-between items-center w-full">
-          <h3 className="text-base font-bold text-white tracking-tight">
-            Glyph Visualization
-          </h3>
-
-          <Dialog.Trigger asChild>
-            <button className="text-sm font-semibold text-gray-400 hover:text-white hover:underline transition-all bg-transparent p-0 border-none outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-sm">
-              More Info
-            </button>
-          </Dialog.Trigger>
-        </div>
-
-        <div className="flex justify-center items-center">
-          <SongGlyph song={song} size={250} />
-        </div>
-      </div>
+      <Dialog.Trigger asChild>
+        {asIcon ? (
+          <button
+            className="hover:scale-105 p-2 text-gray-11 hover:text-white hover:bg-gray-4 rounded-full transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+            aria-label="Expand group details"
+          >
+            <InfoCircledIcon className="w-4 h-4" />
+          </button>
+        ) : (
+          <button className="text-sm font-semibold text-gray-400 hover:text-white hover:underline transition-all bg-transparent p-0 border-none outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-sm">
+            More Info
+          </button>
+        )}
+      </Dialog.Trigger>
 
       {/* Modal Overlay via Portal */}
       <Dialog.Portal>

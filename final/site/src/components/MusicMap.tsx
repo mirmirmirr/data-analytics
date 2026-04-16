@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import ReactECharts from "echarts-for-react";
 import * as echarts from "echarts";
 import type { Song } from "@/types/types";
-import SidePanel from "@/components/SongPanel";
+import SidePanel from "@/components/SidePanel";
 import LegendPanel from "@/components/Legend";
 
 type Props = {
@@ -306,7 +306,7 @@ export default function MusicMap({ data, colorMode }: Props) {
           <div
             ref={zoomBoxRef}
             onMouseDown={onViewportDragStart}
-            className="absolute border-[1.5px] border-blue-8 bg-blue-surface/30 rounded-lg cursor-grab active:cursor-grabbing hover:bg-blue-10/30 transition-colors pointer-events-auto"
+            className="absolute border-[1.5px] border-white bg-gray-10/30 rounded-lg cursor-grab active:cursor-grabbing hover:bg-blue-10/30 transition-colors pointer-events-auto"
           />
         </div>
       </div>
@@ -320,6 +320,8 @@ export default function MusicMap({ data, colorMode }: Props) {
       />
 
       <SidePanel
+        type={colorMode}
+        selectedGroup={selectedGroup}
         activeTrackId={activeTrackId}
         activeSong={activeSong}
         onMouseEnter={() => setIsDrawerHovered(true)}

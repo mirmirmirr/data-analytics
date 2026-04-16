@@ -3,8 +3,10 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { cn } from "@/utils/classname";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { valenceToColor } from "@/utils/glyps";
-import type { Group, GroupDetails, Song } from "@/types/types";
+import type { Song } from "@/types/types";
 import GroupGlyph from "@/components/glyph/GroupGlyph";
+import { useGroupData, getNormalizedId } from "@/hooks/useGroupData";
+import { GroupTags, GroupFeatures } from "@/components/GroupShared";
 
 // Helper function to determine if text should be light or dark based on the background color
 function getContrastTextColor(hexColor: string) {
@@ -27,41 +29,25 @@ function getContrastTextColor(hexColor: string) {
   return yiq >= 128 ? "#121212" : "#FFFFFF";
 }
 
-// Helper to match "Cluster 1" with "1" between the two JSON files
-const getNormalizedId = (str: string | undefined) => {
-  if (!str) return "";
-  return str
-    .toString()
-    .replace(/cluster\s*/i, "")
-    .trim();
-};
-
 type GroupPanelProps = {
   type: "cluster" | "genre";
   label: string;
-  activeSong: Song;
+  activeSong?: Song | null;
+  customTrigger?: React.ReactNode;
 };
 
 export default function GroupPanel({
   type,
   label,
   activeSong,
+  customTrigger,
 }: GroupPanelProps) {
-  const [data, setData] = useState<Group[]>([]);
-  const [descriptions, setDescriptions] = useState<GroupDetails[]>([]);
   const [selectedGroupId, setSelectedGroupId] = useState<string>(label);
+  const { data, descriptions, selectedData, selectedDesc } = useGroupData(
+    type,
+    selectedGroupId,
+  );
 
-  useEffect(() => {
-    fetch(type === "genre" ? "/genre.json" : "/cluster.json")
-      .then((res) => res.json())
-      .then(setData);
-
-    fetch(`/descriptions/${type}.json`)
-      .then((res) => res.json())
-      .then(setDescriptions);
-  }, [type]);
-
-  // Reset the selected group to the triggered label whenever the modal is opened from a different label
   useEffect(() => {
     setSelectedGroupId(label);
   }, [label]);
@@ -72,28 +58,25 @@ export default function GroupPanel({
   );
   const textColor = getContrastTextColor(songColor);
 
-  const selectedData = data.find(
-    (d) => getNormalizedId(d.group) === getNormalizedId(selectedGroupId),
-  );
-  const selectedDesc = descriptions.find(
-    (d) => getNormalizedId(d.group) === getNormalizedId(selectedGroupId),
-  );
-
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="relative mt-1 inline-flex items-center px-2.5 py-1 rounded-full overflow-hidden group cursor-pointer">
-          <div
-            className="absolute inset-0 opacity-70 group-hover:opacity-100 transition-opacity duration-200"
-            style={{ backgroundColor: songColor }}
-          />
-          <span
-            className="relative z-10 text-[10px] uppercase tracking-wider font-bold"
-            style={{ color: textColor }}
-          >
-            {label}
-          </span>
-        </button>
+        {customTrigger ? (
+          customTrigger
+        ) : (
+          <button className="relative mt-1 inline-flex items-center px-2.5 py-1 rounded-full overflow-hidden group cursor-pointer">
+            <div
+              className="absolute inset-0 opacity-70 group-hover:opacity-100 transition-opacity duration-200"
+              style={{ backgroundColor: songColor }}
+            />
+            <span
+              className="relative z-10 text-[10px] uppercase tracking-wider font-bold"
+              style={{ color: textColor }}
+            >
+              {label}
+            </span>
+          </button>
+        )}
       </Dialog.Trigger>
 
       <Dialog.Portal>
@@ -102,7 +85,7 @@ export default function GroupPanel({
         <Dialog.Content
           className={cn(
             "fixed inset-0 z-100 m-auto flex overflow-hidden",
-            "bg-gray-1 rounded-xl shadow-2xl focus:outline-none",
+            "bg-gray-1 rounded-2xl shadow-2xl focus:outline-none",
             "h-[85vh] w-[90vw] max-w-5xl",
           )}
         >
@@ -190,99 +173,12 @@ export default function GroupPanel({
 
             {/* Scrollable Details Section */}
             <div className="p-6 space-y-8">
-              {/* Genres */}
-              {selectedData?.seen_in && selectedData.seen_in.length > 0 && (
-                <section>
-                  <h3 className="text-lg font-bold text-white mb-4">
-                    {type == "cluster"
-                      ? "Top 5 Prominent Genres"
-                      : "Top 5 Clusters Seen In"}
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedData.seen_in.map((g) => (
-                      <span
-                        key={g}
-                        className="px-4 py-1.5 bg-gray-4 hover:bg-gray-6 transition-colors rounded-full text-[14px] font-medium text-white capitalize"
-                      >
-                        {g}
-                      </span>
-                    ))}
-                  </div>
-                </section>
-              )}
-              {/* Audio Features (Mimicking the Artist/Producer lists) */}
-              {selectedData && (
-                <section>
-                  <h3 className="text-lg font-bold text-white mb-4">
-                    Audio Features
-                  </h3>
-                  <div className="space-y-4">
-                    <FeatureRow
-                      label="Energy"
-                      value={selectedData.energy_mean}
-                      isPercentage
-                    />
-                    <FeatureRow
-                      label="Danceability"
-                      value={selectedData.danceability_mean}
-                      isPercentage
-                    />
-                    <FeatureRow
-                      label="Valence"
-                      value={selectedData.valence_mean}
-                      isPercentage
-                    />
-                    <FeatureRow
-                      label="Acousticness"
-                      value={selectedData.acousticness_mean}
-                      isPercentage
-                    />
-                    <FeatureRow
-                      label="Instrumentalness"
-                      value={selectedData.instrumentalness_mean}
-                      isPercentage
-                    />
-                    <FeatureRow
-                      label="Tempo"
-                      value={selectedData.tempo_mean}
-                      suffix=" BPM"
-                    />
-                  </div>
-                </section>
-              )}
+              {selectedData && <GroupTags data={selectedData} type={type} />}
+              {selectedData && <GroupFeatures data={selectedData} />}
             </div>
           </div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
-  );
-}
-
-// Component to mimic the list rows in the Spotify screenshot
-function FeatureRow({
-  label,
-  value,
-  isPercentage = false,
-  suffix = "",
-}: {
-  label: string;
-  value: number;
-  isPercentage?: boolean;
-  suffix?: string;
-}) {
-  const displayValue = isPercentage
-    ? `${(value * 100).toFixed(0)}%`
-    : `${value.toFixed(0)}${suffix}`;
-
-  return (
-    <div className="flex justify-between items-center group">
-      <div>
-        <p className="text-[15px] text-white font-medium">{label}</p>
-        <p className="text-[14px] text-[#A7A7A7]">Mean Value</p>
-      </div>
-      <div className="text-[15px] font-medium text-white px-3 py-1 bg-gray-4 rounded-md group-hover:bg-gray-6 transition-colors">
-        {displayValue}
-      </div>
-    </div>
   );
 }
