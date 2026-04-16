@@ -90,7 +90,10 @@ export default function SidePanel({
             )}
 
             {selectedData && (
-              <div className="flex flex-col bg-gray-3 rounded-xl p-6 gap-4 w-full">
+              <div className="flex flex-col bg-gray-3 rounded-xl p-6 gap-4 w-full relative">
+                <div className="absolute top-6.5 right-6 z-30">
+                  <GlyphLegend />
+                </div>
                 <GroupFeatures data={selectedData} />
               </div>
             )}

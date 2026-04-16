@@ -71,7 +71,7 @@ export default function GlyphLegend({ asIcon = false }: { asIcon?: boolean }) {
           <div className="p-6 pb-4 flex justify-between items-start border-b border-white/10 shrink-0">
             <div>
               <Dialog.Title className="text-2xl font-bold tracking-tight text-white">
-                Glyph Visualizations
+                Glyph Visualizations and Audio Features
               </Dialog.Title>
               <Dialog.Description className="text-sm mt-1 text-gray-400">
                 A glyph is a visual representation of a song's audio features.
