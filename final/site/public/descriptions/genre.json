@@ -1,0 +1,62 @@
+[
+  {
+    "group": "pop-film",
+    "title": "Balanced & Cinematic",
+    "description": "Moderate energy and mood with a blend of acoustic and produced elements.",
+    "insight": "This genre sits near the center of the map, reflecting its hybrid nature between emotional storytelling and mainstream structure."
+  },
+  {
+    "group": "k-pop",
+    "title": "Polished & Energetic",
+    "description": "High-energy, danceable tracks with a bright and polished sound.",
+    "insight": "K-pop aligns closely with high-energy clusters, emphasizing production quality and rhythmic appeal."
+  },
+  {
+    "group": "chill",
+    "title": "Relaxed & Textured",
+    "description": "Low-energy, acoustic-leaning tracks with smooth, steady rhythm.",
+    "insight": "Chill music prioritizes atmosphere over intensity, often blending into multiple clusters depending on mood."
+  },
+  {
+    "group": "sad",
+    "title": "Emotional but Rhythmic",
+    "description": "Moderate danceability with lower emotional tone.",
+    "insight": "Despite its label, 'sad' music is not confined to low-energy regions, appearing across multiple clusters and styles."
+  },
+  {
+    "group": "grunge",
+    "title": "Raw & Intense",
+    "description": "High-energy, low-danceability tracks with heavy instrumentation.",
+    "insight": "Grunge stands out for its intensity and raw sound, aligning with clusters defined by energy rather than rhythm."
+  },
+  {
+    "group": "indian",
+    "title": "Balanced & Acoustic",
+    "description": "Moderate energy and mood with strong acoustic presence.",
+    "insight": "This genre spans multiple regions, reflecting diverse production styles and musical traditions."
+  },
+  {
+    "group": "anime",
+    "title": "Energetic & Instrumental",
+    "description": "Moderate-to-high energy tracks with a mix of vocals and instrumental elements.",
+    "insight": "Anime music shows higher instrumental variation, often blending cinematic and pop structures."
+  },
+  {
+    "group": "sertanejo",
+    "title": "Bright & Acoustic",
+    "description": "High-energy, positive tracks with strong acoustic elements.",
+    "insight": "This genre bridges organic instrumentation with upbeat structure, aligning with both acoustic and energetic clusters."
+  },
+  {
+    "group": "emo",
+    "title": "Emotional & Driven",
+    "description": "Moderate-to-high energy with lower emotional tone.",
+    "insight": "Emo music blends intensity with introspection, placing it between high-energy and low-valence regions."
+  },
+  {
+    "group": "pop",
+    "title": "Balanced & Accessible",
+    "description": "Moderate energy, high danceability, and broadly neutral-positive mood.",
+    "insight": "Pop sits at the center of the map, reflecting its role as a convergence point of multiple musical characteristics."
+  }
+]

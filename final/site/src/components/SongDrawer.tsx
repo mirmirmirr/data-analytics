@@ -1,5 +1,5 @@
-import type { Song } from "@/types/song";
-import SongGlyph from "@/components/SongGlyph";
+import type { Song } from "@/types/types";
+import SongGlyph from "@/components/glyph/SongGlyph";
 
 type Props = {
   activeTrackId: string | null;

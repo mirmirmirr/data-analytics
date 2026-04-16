@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import type { Song } from "@/types/song";
-import SongGlyph from "@/components/SongGlyph";
+import type { Song } from "@/types/types";
+import SongGlyph from "@/components/glyph/SongGlyph";
 import { cn } from "@/utils/classname";
 import { Cross1Icon } from "@radix-ui/react-icons";
 

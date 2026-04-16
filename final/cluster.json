@@ -7,7 +7,7 @@
     "tempo_mean": 158.6127,
     "acousticness_mean": 0.229,
     "instrumentalness_mean": 0.0071,
-    "seen_in": ["sertanejo", "pop", "k-pop", "emo", "anime"]
+    "genres": ["sertanejo", "pop", "k-pop", "emo", "anime"]
   },
   {
     "group": "2",
@@ -17,7 +17,7 @@
     "tempo_mean": 117.7627,
     "acousticness_mean": 0.1802,
     "instrumentalness_mean": 0.0124,
-    "seen_in": ["emo", "sad", "k-pop", "chill", "pop"]
+    "genres": ["emo", "sad", "k-pop", "chill", "pop"]
   },
   {
     "group": "3",
@@ -27,7 +27,7 @@
     "tempo_mean": 113.6607,
     "acousticness_mean": 0.1775,
     "instrumentalness_mean": 0.0071,
-    "seen_in": ["k-pop", "pop", "pop-film", "sertanejo", "indian"]
+    "genres": ["k-pop", "pop", "pop-film", "sertanejo", "indian"]
   },
   {
     "group": "4",
@@ -37,7 +37,7 @@
     "tempo_mean": 112.8084,
     "acousticness_mean": 0.623,
     "instrumentalness_mean": 0.821,
-    "seen_in": ["anime", "chill", "sad", "indian", "emo"]
+    "genres": ["anime", "chill", "sad", "indian", "emo"]
   },
   {
     "group": "5",
@@ -47,7 +47,7 @@
     "tempo_mean": 151.3466,
     "acousticness_mean": 0.6595,
     "instrumentalness_mean": 0.0146,
-    "seen_in": ["pop-film", "indian", "pop", "chill", "sertanejo"]
+    "genres": ["pop-film", "indian", "pop", "chill", "sertanejo"]
   },
   {
     "group": "6",
@@ -57,7 +57,7 @@
     "tempo_mean": 159.7726,
     "acousticness_mean": 0.0515,
     "instrumentalness_mean": 0.0279,
-    "seen_in": ["grunge", "emo", "anime", "sertanejo", "pop"]
+    "genres": ["grunge", "emo", "anime", "sertanejo", "pop"]
   },
   {
     "group": "7",
@@ -67,7 +67,7 @@
     "tempo_mean": 96.323,
     "acousticness_mean": 0.5413,
     "instrumentalness_mean": 0.0035,
-    "seen_in": ["sertanejo", "pop-film", "indian", "k-pop", "pop"]
+    "genres": ["sertanejo", "pop-film", "indian", "k-pop", "pop"]
   },
   {
     "group": "8",
@@ -77,7 +77,7 @@
     "tempo_mean": 101.0774,
     "acousticness_mean": 0.0751,
     "instrumentalness_mean": 0.0174,
-    "seen_in": ["grunge", "anime", "emo", "k-pop", "pop"]
+    "genres": ["grunge", "anime", "emo", "k-pop", "pop"]
   },
   {
     "group": "9",
@@ -87,7 +87,7 @@
     "tempo_mean": 92.0293,
     "acousticness_mean": 0.6728,
     "instrumentalness_mean": 0.015,
-    "seen_in": ["indian", "chill", "pop-film", "pop", "sad"]
+    "genres": ["indian", "chill", "pop-film", "pop", "sad"]
   },
   {
     "group": "10",
@@ -97,6 +97,6 @@
     "tempo_mean": 114.9426,
     "acousticness_mean": 0.6755,
     "instrumentalness_mean": 0.023,
-    "seen_in": ["sad", "chill", "indian", "pop-film", "pop"]
+    "genres": ["sad", "chill", "indian", "pop-film", "pop"]
   }
 ]

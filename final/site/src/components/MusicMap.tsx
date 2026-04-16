@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import ReactECharts from "echarts-for-react";
 import * as echarts from "echarts";
-import type { Song } from "@/types/song";
+import type { Song } from "@/types/types";
 import SidePanel from "@/components/SongPanel";
 import LegendPanel from "@/components/Legend";
 
@@ -311,7 +311,6 @@ export default function MusicMap({ data, colorMode }: Props) {
         </div>
       </div>
 
-      {/* 👇 2. Added the new Legend Panel */}
       <LegendPanel
         uniqueGroups={uniqueGroups}
         colors={colors}
@@ -320,7 +319,6 @@ export default function MusicMap({ data, colorMode }: Props) {
         colorMode={colorMode}
       />
 
-      {/* 👇 3. Updated Side Panel placement */}
       <SidePanel
         activeTrackId={activeTrackId}
         activeSong={activeSong}

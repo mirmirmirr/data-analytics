@@ -137,7 +137,7 @@ cluster_profiles <- song_sample |>
 
 library(jsonlite)
 
-export_data <- song_sample |>
+export_data_songs <- song_sample |>
   select(
     track_id,
     track_name,
@@ -155,9 +155,10 @@ export_data <- song_sample |>
     instrumentalness
   )
 
-write_json(export_data, "songs.json", pretty = TRUE)
+write_json(export_data_songs, "songs.json", pretty = TRUE)
 
-export_data <- genre_profiles |>
+# --- Genre JSON (Includes 'clusters' list sorted by frequency) ---
+export_data_genre <- genre_profiles |>
   slice_head(n = 10) |>
   select(
     track_genre,
@@ -167,11 +168,19 @@ export_data <- genre_profiles |>
     tempo_mean,
     acousticness_mean,
     instrumentalness_mean
+  ) |>
+  left_join(
+    song_sample |>
+      group_by(track_genre) |>
+      summarise(
+        clusters = list(as.integer(names(sort(table(cluster), decreasing = TRUE))[1:5]))
+      ),
+    by = "track_genre"
   )
 
-write_json(export_data, "genre.json", pretty = TRUE)
+write_json(export_data_genre, "genre.json", pretty = TRUE)
 
-export_data <- cluster_profiles |>
+export_data_cluster <- cluster_profiles |>
   select(
     cluster,
     energy_mean,
@@ -180,6 +189,15 @@ export_data <- cluster_profiles |>
     tempo_mean,
     acousticness_mean,
     instrumentalness_mean
-  )
+  ) |>
+  left_join(
+    song_sample |>
+      group_by(cluster) |>
+      summarise(
+        genres = list(as.character(names(sort(table(track_genre), decreasing = TRUE))[1:5]))
+      ),
+    by = "cluster"
+  ) |>
+  arrange(cluster)
 
-write_json(export_data, "cluster.json", pretty = TRUE)
+write_json(export_data_cluster, "cluster.json", pretty = TRUE)

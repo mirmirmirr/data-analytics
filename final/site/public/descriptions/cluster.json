@@ -1,0 +1,62 @@
+[
+  {
+    "group": "Cluster 1",
+    "title": "High-Energy Uplift",
+    "description": "Fast, energetic, and upbeat tracks with strong rhythm and positive mood.",
+    "insight": "This cluster represents high-tempo, feel-good music. Despite spanning multiple genres, these songs share a consistent energetic and uplifting sound profile."
+  },
+  {
+    "group": "Cluster 2",
+    "title": "Groovy but Low-Valence",
+    "description": "Danceable tracks with a darker or more subdued emotional tone.",
+    "insight": "Although highly rhythmic, these songs lean toward lower valence, suggesting that danceability and mood are not always aligned."
+  },
+  {
+    "group": "Cluster 3",
+    "title": "Bright & Dance-Driven",
+    "description": "Highly danceable, energetic, and positive tracks with mainstream appeal.",
+    "insight": "This cluster forms a 'pop core,' where high energy and high valence combine into broadly accessible, upbeat music."
+  },
+  {
+    "group": "Cluster 5",
+    "title": "Acoustic & Fast",
+    "description": "Acoustic-heavy songs with faster tempos but lower energy and mood.",
+    "insight": "These tracks contrast speed with softness—faster rhythms paired with organic instrumentation and more restrained emotional tone."
+  },
+  {
+    "group": "Cluster 7",
+    "title": "Warm & Acoustic",
+    "description": "Mid-energy, acoustic-driven tracks with a warm and positive feel.",
+    "insight": "This cluster blends organic sound with moderate positivity, often bridging genres like folk, indie, and acoustic pop."
+  },
+  {
+    "group": "Cluster 9",
+    "title": "Slow & Melancholic",
+    "description": "Low-energy, acoustic-heavy songs with subdued and introspective mood.",
+    "insight": "This cluster captures slower, more emotional music, emphasizing mood and texture over rhythm or intensity."
+  },
+  {
+    "group": "Cluster 4",
+    "title": "Instrumental & Ambient",
+    "description": "Low-energy, highly instrumental tracks with minimal vocals.",
+    "insight": "This cluster stands out for its extremely high instrumentalness, representing ambient, cinematic, or background-focused music."
+  },
+  {
+    "group": "Cluster 8",
+    "title": "High-Energy, Low-Acoustic",
+    "description": "Energetic tracks with electronic production and minimal acoustic elements.",
+    "insight": "This cluster reflects modern, digitally produced music—high intensity but less organic in sound."
+  },
+  {
+    "group": "Cluster 6",
+    "title": "Fast & Intense",
+    "description": "Very high-energy, fast-tempo tracks with lower danceability.",
+    "insight": "Speed and intensity dominate here, often at the expense of groove, suggesting genres like punk, metal, or high-tempo electronic styles."
+  },
+  {
+    "group": "Cluster 10",
+    "title": "Chill & Danceable",
+    "description": "Low-energy but highly danceable tracks with balanced mood.",
+    "insight": "This cluster shows that music can be rhythmically engaging without being intense—often associated with relaxed or 'lo-fi' styles."
+  }
+]

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import MusicMap from "@/components/MusicMap";
-import type { Song } from "@/types/song";
+import type { Song } from "@/types/types";
 
 export default function App() {
   const [data, setData] = useState<Song[]>([]);

@@ -1,4 +1,4 @@
-import type { Song } from "@/types/song";
+import type { Song } from "@/types/types";
 import GlyphPanel from "@/components/GlyphPanel";
 import GroupPanel from "@/components/GroupPanel";
 

@@ -1,36 +1,50 @@
 import seedrandom from "seedrandom";
-import type { Song } from "@/types/song";
 import { tempoToLines, valenceToColor } from "@/utils/glyps";
 
 type Props = {
-  song: Song;
+  id: string;
+  valence: number;
+  energy: number;
+  danceability: number;
+  acousticness: number;
+  instrumentalness: number;
+  tempo: number;
   size?: number;
 };
 
-export default function SongGlyph({ song, size = 120 }: Props) {
+export default function Glyph({
+  id,
+  valence,
+  energy,
+  danceability,
+  acousticness,
+  instrumentalness,
+  tempo,
+  size = 120,
+}: Props) {
   const center = size / 2;
 
   // 🎯 Seeded RNG (stable per song)
-  const rng = seedrandom(song.track_id);
+  const rng = seedrandom(id);
 
   // 🎨 Encodings
-  const color = valenceToColor(song.valence, song.energy);
-  const lines = tempoToLines(song.tempo);
+  const color = valenceToColor(valence, energy);
+  const lines = tempoToLines(tempo);
 
-  const maxLength = size * (0.25 + song.energy * 0.35);
+  const maxLength = size * (0.25 + energy * 0.35);
   const angleStep = (Math.PI * 2) / lines;
 
-  const fillOpacity = 1 - song.instrumentalness;
+  const fillOpacity = 1 - instrumentalness;
 
   // 🎯 Danceability → angular + length consistency
-  const angleJitterAmount = (1 - song.danceability) * 0.25;
-  const variance = (1 - song.danceability) * maxLength * 0.5;
+  const angleJitterAmount = (1 - danceability) * 0.25;
+  const variance = (1 - danceability) * maxLength * 0.5;
 
   // 🎯 Acousticness → wobble + texture
-  const wobbleAmount = song.acousticness * 6;
+  const wobbleAmount = acousticness * 6;
 
   function getLineLength() {
-    const bias = Math.pow(rng(), 1 + song.danceability * 3);
+    const bias = Math.pow(rng(), 1 + danceability * 3);
     const offset = (1 - bias) * variance;
 
     let length = maxLength - offset;
@@ -38,7 +52,7 @@ export default function SongGlyph({ song, size = 120 }: Props) {
     const noiseAmount = maxLength * 0.08;
     length += (rng() - 0.5) * noiseAmount;
 
-    const spikeChance = 0.08 + (1 - song.danceability) * 0.12;
+    const spikeChance = 0.08 + (1 - danceability) * 0.12;
 
     if (rng() < spikeChance) {
       const spikeBoost = maxLength * (0.1 + rng() * 0.15);
@@ -49,9 +63,9 @@ export default function SongGlyph({ song, size = 120 }: Props) {
   }
 
   function getStrokeDasharray() {
-    if (song.acousticness < 0.2) return "0"; // clean
-    if (song.acousticness < 0.5) return "2 2"; // light texture
-    if (song.acousticness < 0.8) return "3 4"; // medium
+    if (acousticness < 0.2) return "0"; // clean
+    if (acousticness < 0.5) return "2 2"; // light texture
+    if (acousticness < 0.8) return "3 4"; // medium
     return "1 6"; // airy / organic
   }
 
@@ -62,7 +76,7 @@ export default function SongGlyph({ song, size = 120 }: Props) {
       viewBox={`-${size * 0.125} -${size * 0.125} ${size * 1.25} ${size * 1.25}`}
     >
       <defs>
-        <radialGradient id={`bg-${song.track_id}`}>
+        <radialGradient id={`bg-${id}`}>
           <stop offset="0%" stopColor={color} stopOpacity={0.25} />
           <stop offset="25%" stopColor={color} stopOpacity={0.12} />
           <stop offset="50%" stopColor={color} stopOpacity={0} />
@@ -70,12 +84,7 @@ export default function SongGlyph({ song, size = 120 }: Props) {
       </defs>
 
       {/* 🌟 Glow */}
-      <circle
-        cx={center}
-        cy={center}
-        r={size * 1.2}
-        fill={`url(#bg-${song.track_id})`}
-      />
+      <circle cx={center} cy={center} r={size * 1.2} fill={`url(#bg-${id})`} />
 
       {/* 🎵 Radial Lines (now CURVED) */}
       {[...Array(lines)].map((_, i) => {
