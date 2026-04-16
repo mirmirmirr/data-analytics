@@ -13,8 +13,8 @@ export function tempoToLines(tempo: number) {
   const minTempo = 60;
   const maxTempo = 200;
 
-  const minLines = 40;
-  const maxLines = 120;
+  const minLines = 30;
+  const maxLines = 100;
 
   const normalized = (tempo - minTempo) / (maxTempo - minTempo);
   return Math.round(minLines + normalized * (maxLines - minLines));

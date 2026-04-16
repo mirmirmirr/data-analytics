@@ -179,8 +179,8 @@ export default function MusicMap({ data, colorMode }: Props) {
   const handleMainChartReady = (echartsInstance: any) => {
     echartsInstance.setOption({
       dataZoom: [
-        { start: 30, end: 50 },
-        { start: 30, end: 50 },
+        { start: 50, end: 30 },
+        { start: 50, end: 30 },
       ],
     });
     if (zoomBoxRef.current) {

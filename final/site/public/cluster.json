@@ -6,7 +6,7 @@
     "valence_mean": 0.6717,
     "tempo_mean": 158.6127,
     "acousticness_mean": 0.229,
-    "instrumentalness_mean": 0.0071,
+    "instrumentalness_mean": 0.0,
     "seen_in": ["sertanejo", "pop", "k-pop", "emo", "anime"]
   },
   {
