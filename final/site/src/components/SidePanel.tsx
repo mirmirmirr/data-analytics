@@ -159,7 +159,7 @@ export default function SidePanel({
           </div>
         </div>
       ) : (
-        <div className="flex flex-col h-full pt-2 mt:pt-8 p-8 text-start custom-scrollbar">
+        <div className="flex flex-col h-full pt-2 md:pt-8 p-8 text-start custom-scrollbar">
           <h3 className="text-3xl font-bold text-white tracking-tight">
             Music Map
           </h3>
