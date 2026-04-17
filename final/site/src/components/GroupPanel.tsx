@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import * as Accordion from "@radix-ui/react-accordion";
 import * as Dialog from "@radix-ui/react-dialog";
 import { cn } from "@/utils/classname";
 import { Cross1Icon } from "@radix-ui/react-icons";
@@ -7,6 +8,7 @@ import type { Song } from "@/types/types";
 import GroupGlyph from "@/components/glyph/GroupGlyph";
 import { useGroupData, getNormalizedId } from "@/hooks/useGroupData";
 import { GroupTags, GroupFeatures } from "@/components/GroupShared";
+import GlyphLegend from "@/components/GlyphLegend";
 
 // Helper function to determine if text should be light or dark based on the background color
 function getContrastTextColor(hexColor: string) {
@@ -42,6 +44,7 @@ export default function GroupPanel({
   activeSong,
   customTrigger,
 }: GroupPanelProps) {
+  const [isMobile, setIsMobile] = useState(false);
   const [selectedGroupId, setSelectedGroupId] = useState<string>(label);
   const { data, descriptions, selectedData, selectedDesc } = useGroupData(
     type,
@@ -51,6 +54,13 @@ export default function GroupPanel({
   useEffect(() => {
     setSelectedGroupId(label);
   }, [label]);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const songColor = valenceToColor(
     activeSong ? activeSong.valence : 0,
@@ -89,14 +99,30 @@ export default function GroupPanel({
             "h-[85vh] w-[90vw] max-w-5xl",
           )}
         >
-          {/* Sidebar: All Glyphs */}
-          <div className="w-1/4 bg-gray-2 flex flex-col overflow-hidden rounded-xl m-4">
-            <div className="p-4 border-b border-white/10">
+          <div className="w-full md:w-1/4 bg-gray-2 flex flex-col overflow-hidden rounded-xl m-4">
+            <div className="p-4 border-b border-white/10 w-full">
               <h3 className="text-sm font-bold text-white tracking-wide">
                 All {type === "cluster" ? "Clusters" : "Genres"}
               </h3>
+
+              {isMobile && (
+                <Dialog.Close asChild>
+                  <button
+                    className="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors p-2 rounded-full cursor-pointer hover:bg-white/10 outline-none hover:scale-105"
+                    aria-label="Close"
+                  >
+                    <Cross1Icon className="w-5 h-5" />
+                  </button>
+                </Dialog.Close>
+              )}
             </div>
-            <div className="flex-1 overflow-y-auto p-4 space-y-2 custom-scrollbar">
+
+            <Accordion.Root
+              className="flex-1 overflow-y-auto p-4 space-y-2 custom-scrollbar"
+              type="single"
+              defaultValue="item-1"
+              collapsible
+            >
               {data.map((item, index) => {
                 const isSelected =
                   getNormalizedId(item.group) ===
@@ -107,38 +133,82 @@ export default function GroupPanel({
                 );
 
                 return (
-                  <button
+                  <Accordion.Item
                     key={`${item.group}-${index}`}
-                    onClick={() =>
-                      setSelectedGroupId(itemDesc?.group || item.group)
-                    }
-                    className={cn(
-                      "w-full flex items-center gap-4 p-3 rounded-md transition-all text-left group cursor-pointer",
-                      isSelected
-                        ? "bg-white/10"
-                        : "hover:bg-white/5 opacity-70 hover:opacity-100",
-                    )}
+                    value={`${item.group}-${index}`}
                   >
-                    <div className="shrink-0 p-1.5 rounded-md">
-                      <GroupGlyph cluster={item} size={32} />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm font-medium truncate text-white">
-                        {itemDesc?.group || item.group}
-                      </div>
-                      <div className="text-xs text-gray-11 truncate mt-0.5">
-                        {itemDesc?.title || `Group ${item.group}`}
-                      </div>
-                    </div>
-                  </button>
+                    <Accordion.Trigger asChild>
+                      <button
+                        onClick={() =>
+                          setSelectedGroupId(itemDesc?.group || item.group)
+                        }
+                        className={cn(
+                          "w-full flex items-center gap-4 p-3 rounded-md transition-all text-left group cursor-pointer",
+                          isSelected
+                            ? "bg-white/10"
+                            : "hover:bg-white/5 opacity-70 hover:opacity-100",
+                        )}
+                      >
+                        <div className="shrink-0 p-1.5 rounded-md">
+                          <GroupGlyph cluster={item} size={32} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium truncate text-white">
+                            {itemDesc?.group || item.group}
+                          </div>
+                          <div className="text-xs text-gray-11 truncate mt-0.5">
+                            {itemDesc?.title || `Group ${item.group}`}
+                          </div>
+                        </div>
+                      </button>
+                    </Accordion.Trigger>
+
+                    {isMobile && (
+                      <Accordion.Content asChild>
+                        <div className="flex gap-4 items-start flex-col">
+                          <div className="pt-4">
+                            <Dialog.Description className="text-xs font-medium text-gray-11 mt-1">
+                              {selectedDesc?.title || "Unknown Group"}
+                            </Dialog.Description>
+                            <Dialog.Title className="text-2xl! font-extrabold! text-white">
+                              {selectedDesc?.group ||
+                                selectedData?.group ||
+                                label}
+                            </Dialog.Title>
+                            <p className=" text-gray-11 text-xs mt-2!">
+                              {selectedDesc?.description}
+                            </p>
+                          </div>
+                          {selectedData && (
+                            <div className="shrink-0 flex justify-center items-center hover:cursor-pointer relative w-full">
+                              <GroupGlyph cluster={selectedData} size={200} />
+                            </div>
+                          )}
+
+                          <div className="space-y-8">
+                            {selectedData && (
+                              <GroupTags data={selectedData} type={type} />
+                            )}
+                            {selectedData && (
+                              <div className="relative">
+                                <div className="absolute top-0 right-0 z-30">
+                                  <GlyphLegend asIcon />
+                                </div>
+                                <GroupFeatures data={selectedData} />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </Accordion.Content>
+                    )}
+                  </Accordion.Item>
                 );
               })}
-            </div>
+            </Accordion.Root>
           </div>
 
           {/* Main Content: Selected Group Details (Styled like Spotify Credits) */}
-          <div className="flex-1 flex flex-col overflow-y-auto bg-gray-1 relative">
-            {/* Header Section */}
+          <div className="hidden md:flex flex-1 flex-col overflow-y-auto bg-gray-1 relative">
             <div className="sticky top-0 z-10 bg-gray-1 flex flex-row gap-8 items-start justify-between border-b border-white/10 p-6 pb-2">
               <div className="flex gap-4 items-start">
                 {selectedData && (
@@ -171,7 +241,6 @@ export default function GroupPanel({
               </Dialog.Close>
             </div>
 
-            {/* Scrollable Details Section */}
             <div className="p-6 space-y-8">
               {selectedData && <GroupTags data={selectedData} type={type} />}
               {selectedData && <GroupFeatures data={selectedData} />}

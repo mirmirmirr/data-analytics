@@ -44,15 +44,6 @@
 }
 
 :root {
-  /* --text: #6b6375; */
-  /* --text-h: #08060d; */
-  /* --bg: var(--color-black); */
-  --border: var(--color-gray-7);
-  --code-bg: var(--color-gray-1);
-  --accent: var(--color-blue-11);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
@@ -68,18 +59,23 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 #root {
+  overflow: hidden;
   width: 100vw;
   height: 100vh;
   text-align: center;
-  border-inline: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-}
-
-body {
-  margin: 0;
 }
 
 h1,
@@ -109,19 +105,4 @@ h2 {
 }
 p {
   margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
 }

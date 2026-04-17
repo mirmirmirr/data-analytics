@@ -37,7 +37,6 @@ const audioFeatures = [
 ];
 
 export default function GlyphLegend({ asIcon = false }: { asIcon?: boolean }) {
-  // 1. Add state to track the currently active SVG
   const [activeSvg, setActiveSvg] = useState<string | null>(null);
 
   return (
@@ -64,16 +63,16 @@ export default function GlyphLegend({ asIcon = false }: { asIcon?: boolean }) {
           className={cn(
             "fixed inset-0 z-100 m-auto flex flex-col overflow-hidden",
             "bg-[#181818] rounded-2xl shadow-2xl focus:outline-none",
-            "h-fit w-4xl",
+            "h-fit w-7/8 md:w-4xl",
           )}
         >
           {/* Header */}
           <div className="p-6 pb-4 flex justify-between items-start border-b border-white/10 shrink-0">
             <div>
-              <Dialog.Title className="text-2xl font-bold tracking-tight text-white">
+              <Dialog.Title className="text-md! md:text-2xl font-bold tracking-tight text-white">
                 Glyph Visualizations and Audio Features
               </Dialog.Title>
-              <Dialog.Description className="text-sm mt-1 text-gray-400">
+              <Dialog.Description className="text-xs md:text-sm mt-1 text-gray-400">
                 A glyph is a visual representation of a song's audio features.
               </Dialog.Description>
             </div>
@@ -92,8 +91,8 @@ export default function GlyphLegend({ asIcon = false }: { asIcon?: boolean }) {
           </div>
 
           {/* Main Content Area */}
-          <div className="flex-1 flex flex-col md:flex-row overflow-hidden min-h-0 p-3">
-            <div className="w-full md:w-3/5 h-[30vh] flex md:h-full items-center justify-center shrink-0 my-auto">
+          <div className="flex flex-col md:flex-row overflow-hidden min-h-0 p-3">
+            <div className="w-full md:w-3/5 flex md:h-full items-center justify-center shrink-0 my-auto p-3 md:p-0">
               <img
                 src={activeSvg || "/glyph/legend.svg"}
                 alt="Glyph Legend"
@@ -101,7 +100,7 @@ export default function GlyphLegend({ asIcon = false }: { asIcon?: boolean }) {
               />
             </div>
 
-            <div className="w-full md:w-2/5 overflow-y-auto md:pl-0 flex flex-col">
+            <div className="w-full md:w-2/5 overflow-y-auto md:pl-0 flex flex-col max-h-[20vh] md:max-h-full overflow-auto">
               {audioFeatures.map((feature, index) => (
                 <div
                   key={index}

@@ -4,6 +4,7 @@ import * as echarts from "echarts";
 import type { Song } from "@/types/types";
 import SidePanel from "@/components/SidePanel";
 import LegendPanel from "@/components/Legend";
+import { BookmarkIcon } from "@radix-ui/react-icons";
 
 type Props = {
   data: Song[];
@@ -11,6 +12,11 @@ type Props = {
 };
 
 export default function MusicMap({ data, colorMode }: Props) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // 1. Add state to control legend visibility
+  const [showLegend, setShowLegend] = useState(false);
+
   const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
   const [activeTrackId, setActiveTrackId] = useState<string | null>(null);
   const [isDrawerHovered, setIsDrawerHovered] = useState(false);
@@ -31,6 +37,17 @@ export default function MusicMap({ data, colorMode }: Props) {
   useEffect(() => {
     setSelectedGroup(null);
   }, [colorMode]);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      setShowLegend(!mobile);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const uniqueGroups = Array.from(
     new Set(
@@ -102,7 +119,12 @@ export default function MusicMap({ data, colorMode }: Props) {
     backgroundColor: "transparent",
     xAxis: { type: "value", show: false, scale: true },
     yAxis: { type: "value", show: false, scale: true },
-    grid: { top: 0, left: 200, right: 360, bottom: 0 },
+    grid: {
+      top: isMobile ? 50 : 0,
+      left: isMobile ? 10 : 200,
+      right: isMobile ? 10 : 360,
+      bottom: isMobile ? 200 : 0,
+    },
     dataZoom: [
       {
         id: "zoomX",
@@ -139,7 +161,8 @@ export default function MusicMap({ data, colorMode }: Props) {
 
   const onMainEvents = {
     mouseover: (params: any) => {
-      if (isDrawerHovered) return;
+      if (isMobile || isDrawerHovered) return;
+
       if (params.componentType === "series") {
         if (hoverIntentTimeout.current)
           clearTimeout(hoverIntentTimeout.current);
@@ -149,6 +172,7 @@ export default function MusicMap({ data, colorMode }: Props) {
       }
     },
     mouseout: (params: any) => {
+      if (isMobile) return;
       if (params.componentType === "series") {
         if (hoverIntentTimeout.current)
           clearTimeout(hoverIntentTimeout.current);
@@ -157,11 +181,17 @@ export default function MusicMap({ data, colorMode }: Props) {
     click: (params: any) => {
       if (params.componentType === "series") {
         const clickedData = params.data;
-        const clickedGroupId =
-          colorMode === "cluster" ? clickedData[3] : clickedData[6];
-        setSelectedGroup((prev) =>
-          prev === String(clickedGroupId) ? null : String(clickedGroupId),
-        );
+
+        if (isMobile) {
+          setActiveTrackId(clickedData[7]);
+          setSelectedGroup(null);
+        } else {
+          const clickedGroupId =
+            colorMode === "cluster" ? clickedData[3] : clickedData[6];
+          setSelectedGroup((prev) =>
+            prev === String(clickedGroupId) ? null : String(clickedGroupId),
+          );
+        }
       }
     },
     dataZoom: (params: any, echartsInstance: any) => {
@@ -286,6 +316,16 @@ export default function MusicMap({ data, colorMode }: Props) {
 
   return (
     <div className="relative w-full h-full overflow-hidden">
+      {isMobile && (
+        <button
+          className="absolute top-4 right-4 z-[60] bg-gray-1/90 backdrop-blur-md shadow-lg border border-white/10 text-gray-400 hover:text-white transition-colors p-2.5 rounded-full cursor-pointer hover:bg-white/10 outline-none focus-visible:ring-2 focus-visible:ring-blue-8 hover:scale-105"
+          aria-label="Toggle Legend"
+          onClick={() => setShowLegend((prev) => !prev)}
+        >
+          <BookmarkIcon className="w-5 h-5" />
+        </button>
+      )}
+
       <ReactECharts
         ref={mainMapRef}
         option={mainOptions}
@@ -311,13 +351,16 @@ export default function MusicMap({ data, colorMode }: Props) {
         </div>
       </div>
 
-      <LegendPanel
-        uniqueGroups={uniqueGroups}
-        colors={colors}
-        selectedGroup={selectedGroup}
-        setSelectedGroup={setSelectedGroup}
-        colorMode={colorMode}
-      />
+      {showLegend && (
+        <LegendPanel
+          uniqueGroups={uniqueGroups}
+          colors={colors}
+          selectedGroup={selectedGroup}
+          setSelectedGroup={setSelectedGroup}
+          colorMode={colorMode}
+          onClose={() => setShowLegend(false)}
+        />
+      )}
 
       <SidePanel
         type={colorMode}

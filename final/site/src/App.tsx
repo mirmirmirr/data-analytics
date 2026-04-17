@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import MusicMap from "@/components/MusicMap";
 import type { Song } from "@/types/types";
+import { cn } from "@/utils/classname";
 
 export default function App() {
   const [data, setData] = useState<Song[]>([]);
@@ -23,7 +24,10 @@ export default function App() {
         onValueChange={(value) => {
           if (value) setColorMode(value as "cluster" | "genre");
         }}
-        className="absolute top-14 left-6 z-10 bg-gray-3 backdrop-blur-md p-1 rounded-full shadow-sm flex gap-1"
+        className={cn(
+          "z-10 bg-gray-3 p-1 rounded-full shadow-sm flex gap-1 absolute top-4 inset-x-0 mx-auto w-max",
+          "md:absolute md:left-6 md:top-12 md:inset-x-none md:mx-0",
+        )}
         aria-label="Color mode"
       >
         <ToggleGroup.Item
