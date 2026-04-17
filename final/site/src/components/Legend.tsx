@@ -59,7 +59,7 @@ export default function LegendPanel({
                 className="w-3 h-3 rounded-full shrink-0"
                 style={{ backgroundColor: color }}
               />
-              <span className="text-xs font-medium text-gray-11 truncate">
+              <span className="text-xs text-gray-11 truncate">
                 {colorMode === "cluster" ? "Cluster " : ""}
                 {groupId}
               </span>

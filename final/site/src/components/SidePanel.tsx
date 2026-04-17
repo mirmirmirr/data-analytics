@@ -145,7 +145,7 @@ export default function SidePanel({
 
             <div className="flex flex-col bg-gray-3 rounded-xl p-6 gap-4 w-full">
               <div className="flex justify-between items-center w-full">
-                <h3 className="text-base font-bold text-white tracking-tight">
+                <h3 className="text-base font-semibold text-white tracking-tight">
                   Glyph Visualization
                 </h3>
 

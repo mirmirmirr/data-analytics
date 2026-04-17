@@ -41,11 +41,13 @@
   --color-blue-surface: #0d1e4080;
   --color-blue-indicator: #2654ab;
   --color-blue-track: #2654ab;
+
+  --font-heading: "Lexend Deca", system-ui, "Segoe UI", Roboto, sans-serif;
 }
 
 :root {
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
-  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: "Lexend Deca", system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   font: 18px/145% var(--sans);

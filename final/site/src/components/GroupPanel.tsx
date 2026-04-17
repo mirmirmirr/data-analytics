@@ -105,16 +105,14 @@ export default function GroupPanel({
                 All {type === "cluster" ? "Clusters" : "Genres"}
               </h3>
 
-              {isMobile && (
-                <Dialog.Close asChild>
-                  <button
-                    className="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors p-2 rounded-full cursor-pointer hover:bg-white/10 outline-none hover:scale-105"
-                    aria-label="Close"
-                  >
-                    <Cross1Icon className="w-5 h-5" />
-                  </button>
-                </Dialog.Close>
-              )}
+              <Dialog.Close asChild>
+                <button
+                  className="absolute z-30 top-6 right-6 text-gray-400 hover:text-white transition-colors p-2 rounded-full cursor-pointer hover:bg-white/10 outline-none hover:scale-105"
+                  aria-label="Close"
+                >
+                  <Cross1Icon className="w-5 h-5" />
+                </button>
+              </Dialog.Close>
             </div>
 
             <Accordion.Root
@@ -209,7 +207,7 @@ export default function GroupPanel({
 
           {/* Main Content: Selected Group Details (Styled like Spotify Credits) */}
           <div className="hidden md:flex flex-1 flex-col overflow-y-auto bg-gray-1 relative">
-            <div className="sticky top-0 z-10 bg-gray-1 flex flex-row gap-8 items-start justify-between border-b border-white/10 p-6 pb-2">
+            <div className="sticky top-4 z-10 bg-gray-1 flex flex-row gap-8 items-start justify-between border-b border-white/10 p-6 pb-2">
               <div className="flex gap-4 items-start">
                 {selectedData && (
                   <div className="shrink-0">
@@ -231,14 +229,6 @@ export default function GroupPanel({
                   </p>
                 </div>
               </div>
-              <Dialog.Close asChild>
-                <button
-                  className="text-gray-400 hover:text-white transition-colors p-2 rounded-full cursor-pointer hover:bg-white/10 outline-none hover:scale-105"
-                  aria-label="Close"
-                >
-                  <Cross1Icon className="w-5 h-5" />
-                </button>
-              </Dialog.Close>
             </div>
 
             <div className="p-6 space-y-8">

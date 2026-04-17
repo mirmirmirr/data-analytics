@@ -50,7 +50,7 @@ export default function GlyphLegend({ asIcon = false }: { asIcon?: boolean }) {
             <InfoCircledIcon className="w-4 h-4" />
           </button>
         ) : (
-          <button className="text-sm font-semibold text-gray-400 hover:text-white hover:underline transition-all bg-transparent p-0 border-none outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-sm">
+          <button className="text-sm text-gray-400 hover:text-white hover:underline transition-all bg-transparent p-0 border-none outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-sm">
             More Info
           </button>
         )}
@@ -72,7 +72,7 @@ export default function GlyphLegend({ asIcon = false }: { asIcon?: boolean }) {
               <Dialog.Title className="text-md! md:text-2xl font-bold tracking-tight text-white">
                 Glyph Visualizations and Audio Features
               </Dialog.Title>
-              <Dialog.Description className="text-xs md:text-sm mt-1 text-gray-400">
+              <Dialog.Description className="text-xs md:text-sm mt-1 text-gray-11">
                 A glyph is a visual representation of a song's audio features.
               </Dialog.Description>
             </div>
@@ -108,7 +108,7 @@ export default function GlyphLegend({ asIcon = false }: { asIcon?: boolean }) {
                   onMouseEnter={() => setActiveSvg(feature.svg)}
                   onMouseLeave={() => setActiveSvg(null)}
                 >
-                  <span className="text-sm font-medium text-white">
+                  <span className="font-heading text-sm text-white">
                     {feature.title}
                   </span>
                   <span className="text-xs text-gray-11">{feature.desc}</span>

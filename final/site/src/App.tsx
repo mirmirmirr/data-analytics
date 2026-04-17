@@ -33,7 +33,7 @@ export default function App() {
         <ToggleGroup.Item
           value="cluster"
           aria-label="Color by cluster"
-          className="px-4 py-2 text-xs font-medium rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-8 data-[state=on]:bg-blue-8 data-[state=on]:shadow-sm data-[state=on]:text-white data-[state=off]:text-gray-10 data-[state=off]:hover:text-gray-11"
+          className="px-4 py-2 text-xs rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-8 data-[state=on]:bg-blue-8 data-[state=on]:shadow-sm data-[state=on]:text-white data-[state=off]:text-gray-10 data-[state=off]:hover:text-gray-11"
         >
           Cluster
         </ToggleGroup.Item>
@@ -41,7 +41,7 @@ export default function App() {
         <ToggleGroup.Item
           value="genre"
           aria-label="Color by genre"
-          className="px-4 py-2 text-xs font-medium rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-8 data-[state=on]:bg-blue-8 data-[state=on]:shadow-sm data-[state=on]:text-white data-[state=off]:text-gray-10 data-[state=off]:hover:text-gray-11"
+          className="px-4 py-2 text-xs rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-8 data-[state=on]:bg-blue-8 data-[state=on]:shadow-sm data-[state=on]:text-white data-[state=off]:text-gray-10 data-[state=off]:hover:text-gray-11"
         >
           Genre
         </ToggleGroup.Item>

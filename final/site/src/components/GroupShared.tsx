@@ -19,7 +19,7 @@ export function GroupTags({
         {data.seen_in.map((g) => (
           <span
             key={g}
-            className="px-4 py-1.5 bg-gray-4 hover:bg-gray-6 transition-colors rounded-full text-[14px] font-medium text-white capitalize"
+            className="px-4 py-1.5 bg-gray-4 hover:bg-gray-6 transition-colors rounded-full text-[14px] text-white capitalize"
           >
             {g}
           </span>
@@ -112,7 +112,7 @@ function FeatureRow({ label, value }: { label: string; value: number }) {
         <p className="text-[15px] text-white font-medium">{label}</p>
         <p className="text-[13px] text-[#A7A7A7]">{rawDataText}</p>
       </div>
-      <div className="text-[13px] font-medium text-white px-3 py-1.5 bg-gray-4 rounded-md group-hover:bg-gray-6 transition-colors">
+      <div className="text-[13px] text-white px-3 py-1.5 bg-gray-4 rounded-md group-hover:bg-gray-6 transition-colors">
         {displayValue}
       </div>
     </div>
