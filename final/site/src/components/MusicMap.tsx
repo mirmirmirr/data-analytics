@@ -24,7 +24,7 @@ export default function MusicMap({ data, colorMode }: Props) {
   const mainMapRef = useRef<ReactECharts>(null);
   const zoomBoxRef = useRef<HTMLDivElement>(null);
   const minimapAreaRef = useRef<HTMLDivElement>(null);
-  const hoverIntentTimeout = useRef<NodeJS.Timeout | null>(null);
+  const hoverIntentTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isDraggingViewport = useRef(false);
   const dragStartMouse = useRef({ x: 0, y: 0 });
@@ -68,51 +68,53 @@ export default function MusicMap({ data, colorMode }: Props) {
     "#FF2D55",
   ];
 
-  const series = uniqueGroups.map((groupId, index) => {
-    const groupData = data.filter((d) =>
-      colorMode === "cluster"
-        ? d.cluster === groupId
-        : d.track_genre === groupId,
-    );
+  const series: echarts.ScatterSeriesOption[] = uniqueGroups.map(
+    (groupId, index) => {
+      const groupData = data.filter((d) =>
+        colorMode === "cluster"
+          ? d.cluster === groupId
+          : d.track_genre === groupId,
+      );
 
-    const isDimmed =
-      selectedGroup !== null && selectedGroup !== String(groupId);
-    const activeColor = colors[index % colors.length];
+      const isDimmed =
+        selectedGroup !== null && selectedGroup !== String(groupId);
+      const activeColor = colors[index % colors.length];
 
-    return {
-      type: "scatter",
-      id: `group-${index}`,
-      name: `${colorMode === "cluster" ? "Cluster" : "Genre"} ${groupId}`,
-      data: groupData.map((d) => [
-        d.x,
-        d.y,
-        d.track_name,
-        d.cluster,
-        d.artists,
-        d.album_name,
-        d.track_genre,
-        d.track_id,
-      ]),
-      symbolSize: 10,
-      large: true,
-      largeThreshold: 2000,
-      itemStyle: {
-        color: isDimmed ? "#313131" : activeColor,
-        opacity: isDimmed ? 0.15 : 0.7,
-      },
-      emphasis: {
-        scale: true,
-        // focus: "self",
+      return {
+        type: "scatter",
+        id: `group-${index}`,
+        name: `${colorMode === "cluster" ? "Cluster" : "Genre"} ${groupId}`,
+        data: groupData.map((d) => [
+          d.x,
+          d.y,
+          d.track_name,
+          d.cluster,
+          d.artists,
+          d.album_name,
+          d.track_genre,
+          d.track_id,
+        ]),
+        symbolSize: 10,
+        large: true,
+        largeThreshold: 2000,
         itemStyle: {
-          opacity: 1,
-          borderColor: activeColor,
-          borderWidth: 14,
-          shadowBlur: 12,
-          shadowColor: "rgba(0, 0, 0, 0.4)",
+          color: isDimmed ? "#313131" : activeColor,
+          opacity: isDimmed ? 0.15 : 0.7,
         },
-      },
-    };
-  });
+        emphasis: {
+          scale: true,
+          // focus: "self",
+          itemStyle: {
+            opacity: 1,
+            borderColor: activeColor,
+            borderWidth: 14,
+            shadowBlur: 12,
+            shadowColor: "rgba(0, 0, 0, 0.4)",
+          },
+        },
+      };
+    },
+  );
 
   const mainOptions: echarts.EChartsOption = {
     animation: false,
@@ -194,7 +196,7 @@ export default function MusicMap({ data, colorMode }: Props) {
         }
       }
     },
-    dataZoom: (params: any, echartsInstance: any) => {
+    dataZoom: (_params: any, echartsInstance: any) => {
       if (isDraggingViewport.current) return;
       const dz = echartsInstance.getOption().dataZoom;
       if (dz && dz.length >= 2 && zoomBoxRef.current) {
