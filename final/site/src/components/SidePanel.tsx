@@ -161,14 +161,14 @@ export default function SidePanel({
       ) : (
         <div className="flex flex-col h-full pt-2 md:pt-8 p-8 text-start custom-scrollbar">
           <h3 className="text-3xl font-bold text-white tracking-tight">
-            Music Map
+            Sonorum
           </h3>
-          <p className="text-sm text-gray-11">
-            Music isn’t organized in neat categories—it exists on a spectrum.
+          <p className="text-xs text-gray-11">
+            from the latin word meaning "of sound".
           </p>
           <section className="mt-4 flex flex-col gap-4">
             <p className="text-sm text-gray-11">
-              This map visualizes songs based on their audio features, placing
+              A sonorum visualizes songs based on their audio features, placing
               similar tracks closer together to reveal hidden patterns in sound.
             </p>
             <ul className="text-sm text-gray-11 flex flex-col gap-2">
