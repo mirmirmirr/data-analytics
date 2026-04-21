@@ -71,7 +71,7 @@ export default function SidePanel({
               activeSong={activeSong}
               customTrigger={
                 <button
-                  className="p-2 text-gray-11 hover:scale-105 hover:text-white hover:bg-gray-4 rounded-full transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                  className="p-2 text-gray-11 hover:scale-110 hover:text-white hover:bg-gray-4 rounded-full transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                   aria-label="Expand group details"
                 >
                   <SizeIcon className="w-4 h-4" />
@@ -81,7 +81,7 @@ export default function SidePanel({
           </div>
 
           {/* Existing Content */}
-          <div className="pb-4 pl-4 pr-2 flex flex-col gap-4 relative h-full overflow-y-auto text-start custom-scrollbar">
+          <div className="pb-6 pl-6 pr-2 flex flex-col gap-4 relative h-full overflow-y-auto text-start custom-scrollbar">
             <div className="flex flex-col">
               {selectedData && (
                 <div className="shrink-0 flex justify-center items-center hover:cursor-pointer relative">
@@ -126,7 +126,7 @@ export default function SidePanel({
           </div>
         </>
       ) : activeTrackId && activeSong ? (
-        <div className="py-4 pl-4 pr-2 flex flex-col gap-4 relative h-full overflow-y-auto custom-scrollbar">
+        <div className="py-6 pl-6 pr-2 flex flex-col gap-4 relative h-full overflow-y-auto custom-scrollbar">
           <div className="flex gap-2">
             <GroupPanel
               type="cluster"
@@ -159,7 +159,7 @@ export default function SidePanel({
           </div>
         </div>
       ) : (
-        <div className="flex flex-col h-full gap-6 pt-2 md:pt-8 p-8 text-start custom-scrollbar justify-between">
+        <div className="flex flex-col h-full gap-6 pt-2 md:pt-6 p-6 text-start custom-scrollbar justify-between">
           <section>
             <h3 className="text-3xl font-bold text-white tracking-tight">
               Sona
@@ -175,19 +175,32 @@ export default function SidePanel({
           </section>
 
           <div className="flex flex-col gap-6">
-            <section className="flex flex-col bg-gray-3 rounded-xl p-4 gap-4 w-full">
-              <ul className="text-sm text-gray-11 flex flex-col gap-2">
-                <li>
-                  <b className="text-white">Clusters</b> group songs by their
-                  actual characteristics, showing natural structures in the
-                  data.
-                </li>
-                <li>
-                  <b className="text-white">Genres</b> overlay traditional
-                  labels, exposing where those categories align—or break down.
-                </li>
-              </ul>
-            </section>
+            <GroupPanel
+              type={type}
+              label={"Cluster 1"}
+              activeSong={activeSong}
+              customTrigger={
+                <section
+                  className={cn(
+                    "flex flex-col bg-gray-3 rounded-xl p-4 gap-4 w-full",
+                    "hover:bg-gray-4 cursor-pointer transition-colors",
+                  )}
+                >
+                  <ul className="text-sm text-gray-11 flex flex-col gap-2">
+                    <li>
+                      <b className="text-white">Clusters</b> group songs by
+                      their actual characteristics, showing natural structures
+                      in the data.
+                    </li>
+                    <li>
+                      <b className="text-white">Genres</b> overlay traditional
+                      labels, exposing where those categories align—or break
+                      down.
+                    </li>
+                  </ul>
+                </section>
+              }
+            />
 
             <section className="flex flex-col bg-gray-3 rounded-xl p-4 gap-4 w-full">
               <p className="text-sm text-gray-11 italic">

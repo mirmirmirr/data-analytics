@@ -44,7 +44,7 @@ export default function GlyphLegend({ asIcon = false }: { asIcon?: boolean }) {
       <Dialog.Trigger asChild>
         {asIcon ? (
           <button
-            className="hover:scale-105 p-2 text-gray-11 hover:text-white hover:bg-gray-4 rounded-full transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+            className="hover:scale-110 p-2 text-gray-11 hover:text-white hover:bg-gray-4 rounded-full transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white/50"
             aria-label="Expand group details"
           >
             <InfoCircledIcon className="w-4 h-4" />
@@ -85,7 +85,7 @@ export default function GlyphLegend({ asIcon = false }: { asIcon?: boolean }) {
                 )}
                 aria-label="Close"
               >
-                <Cross1Icon />
+                <Cross1Icon className="w-5 h-5" />
               </button>
             </Dialog.Close>
           </div>

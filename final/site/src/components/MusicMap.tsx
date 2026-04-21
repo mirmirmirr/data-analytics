@@ -325,7 +325,7 @@ export default function MusicMap({ data, colorMode }: Props) {
     <div className="relative w-full h-full overflow-hidden">
       {isMobile && (
         <button
-          className="absolute top-4 right-4 z-[60] bg-gray-1/90 backdrop-blur-md shadow-lg border border-white/10 text-gray-400 hover:text-white transition-colors p-2.5 rounded-full cursor-pointer hover:bg-white/10 outline-none focus-visible:ring-2 focus-visible:ring-blue-8 hover:scale-105"
+          className="absolute top-4 right-4 z-60 bg-gray-1/90 backdrop-blur-md shadow-lg border border-white/10 text-gray-400 hover:text-white transition-colors p-2.5 rounded-full cursor-pointer hover:bg-white/10 outline-none focus-visible:ring-2 focus-visible:ring-blue-8 hover:scale-110"
           aria-label="Toggle Legend"
           onClick={() => setShowLegend((prev) => !prev)}
         >
