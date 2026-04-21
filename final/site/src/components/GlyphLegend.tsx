@@ -92,7 +92,7 @@ export default function GlyphLegend({ asIcon = false }: { asIcon?: boolean }) {
 
           {/* Main Content Area */}
           <div className="flex flex-col md:flex-row overflow-hidden min-h-0 p-3">
-            <div className="w-full md:w-3/5 flex md:h-full items-center justify-center shrink-0 my-auto p-3 md:p-0">
+            <div className="w-full md:w-3/5 flex md:h-full items-center justify-center shrink-0 my-auto p-4">
               <img
                 src={activeSvg || "/glyph/legend.svg"}
                 alt="Glyph Legend"
