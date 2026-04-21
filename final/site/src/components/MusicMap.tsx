@@ -53,7 +53,12 @@ export default function MusicMap({ data, colorMode }: Props) {
     new Set(
       data.map((d) => (colorMode === "cluster" ? d.cluster : d.track_genre)),
     ),
-  ).sort();
+  ).sort((a, b) => {
+    if (colorMode === "cluster") {
+      return parseInt(String(a), 10) - parseInt(String(b), 10);
+    }
+    return String(a).localeCompare(String(b));
+  });
 
   const colors = [
     "#FF3B30",
