@@ -253,8 +253,11 @@ export default function GroupPanel({
             <div className="sticky top-4 z-10 bg-gray-1 flex flex-row gap-8 items-start justify-between border-b border-white/10 p-6 pb-2">
               <div className="flex gap-4 items-start">
                 {selectedData && (
-                  <div className="shrink-0">
+                  <div className="shrink-0 relative">
                     <GroupGlyph cluster={selectedData} size={200} />
+                    <div className="absolute top-0 right-0 z-30">
+                      <GlyphLegend asIcon />
+                    </div>
                   </div>
                 )}
                 <div>

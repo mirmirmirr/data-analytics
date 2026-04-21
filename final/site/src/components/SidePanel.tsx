@@ -62,7 +62,7 @@ export default function SidePanel({
       {selectedGroupId ? (
         <>
           {/* EXPAND BUTTON */}
-          <div className="absolute top-6.5 md:top-2 right-4 z-30">
+          <div className="absolute top-8.5 md:top-2 right-4 z-30">
             <GroupPanel
               type={type}
               label={
@@ -174,7 +174,7 @@ export default function SidePanel({
             </div>
           </section>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             <GroupPanel
               type={type}
               label={"Cluster 1"}
@@ -186,26 +186,37 @@ export default function SidePanel({
                     "hover:bg-gray-4 cursor-pointer transition-colors",
                   )}
                 >
-                  <ul className="text-sm text-gray-11 flex flex-col gap-2">
+                  <ul className="text-xs text-gray-11 flex flex-col gap-2">
                     <li>
                       <b className="text-white">Clusters</b> group songs by
-                      their actual characteristics, showing natural structures
-                      in the data.
+                      shared characteristics, showing natural structure.
                     </li>
                     <li>
-                      <b className="text-white">Genres</b> overlay traditional
-                      labels, exposing where those categories align—or break
-                      down.
+                      <b className="text-white">Genres</b> overlay familiar
+                      labels, revealing where they align—or break.
                     </li>
                   </ul>
                 </section>
               }
             />
 
+            {/* <section className="flex flex-col bg-gray-3 rounded-xl p-4 gap-4 w-full">
+              <p className="text-xs text-gray-11">
+                <li>
+                  <b className="text-white">Genres</b> overlay familiar labels,
+                  revealing where they align—or break.
+                </li>
+              </p>
+            </section> */}
             <section className="flex flex-col bg-gray-3 rounded-xl p-4 gap-4 w-full">
-              <p className="text-sm text-gray-11 italic">
-                Hover to explore individual tracks on the map or click groups to
-                see their defining features and songs.
+              <p className="text-xs text-gray-11">
+                Throughout the site, there are{" "}
+                <span className="font-bold text-white">glyphs</span>, visual
+                markers represent a song or group’s features.
+              </p>
+              <p className="text-xs text-gray-11 italic">
+                Hover to explore tracks, or click groups to see their defining
+                features.
               </p>
             </section>
           </div>
