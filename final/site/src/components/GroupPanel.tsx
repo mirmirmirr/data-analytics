@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import * as Dialog from "@radix-ui/react-dialog";
+import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { cn } from "@/utils/classname";
 import { Cross1Icon } from "@radix-ui/react-icons";
 import { valenceToColor } from "@/utils/glyps";
@@ -45,22 +46,36 @@ export default function GroupPanel({
   customTrigger,
 }: GroupPanelProps) {
   const [isMobile, setIsMobile] = useState(false);
+  const [currentType, setCurrentType] = useState<"cluster" | "genre">(type);
   const [selectedGroupId, setSelectedGroupId] = useState<string>(label);
+
   const { data, descriptions, selectedData, selectedDesc } = useGroupData(
-    type,
+    currentType,
     selectedGroupId,
   );
 
+  // Sync state when opened from a new trigger
   useEffect(() => {
     setSelectedGroupId(label);
-  }, [label]);
+    setCurrentType(type);
+  }, [label, type]);
 
+  // Handle mobile check
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  // When switching between cluster/genre, if the old selected ID doesn't exist
+  // in the new data list, select the first item in the new list automatically
+  useEffect(() => {
+    if (data.length > 0 && !selectedData) {
+      const firstItemGroup = descriptions[0]?.group || data[0].group;
+      setSelectedGroupId(firstItemGroup);
+    }
+  }, [currentType, data, selectedData, descriptions]);
 
   const songColor = valenceToColor(
     activeSong ? activeSong.valence : 0,
@@ -99,20 +114,45 @@ export default function GroupPanel({
             "h-[85vh] w-[90vw] max-w-5xl",
           )}
         >
-          <div className="w-full md:w-1/4 bg-gray-2 flex flex-col overflow-hidden rounded-xl m-4">
-            <div className="p-4 border-b border-white/10 w-full">
-              <h3 className="text-sm font-bold text-white tracking-wide">
-                All {type === "cluster" ? "Clusters" : "Genres"}
-              </h3>
+          <Dialog.Close asChild>
+            <button
+              className="absolute z-50 top-4 right-4 md:top-6 md:right-6 text-gray-400 hover:text-white transition-colors p-2.5 rounded-full cursor-pointer bg-black/20 hover:bg-white/10 outline-none hover:scale-110"
+              aria-label="Close"
+            >
+              <Cross1Icon className="w-5 h-5" />
+            </button>
+          </Dialog.Close>
 
-              <Dialog.Close asChild>
-                <button
-                  className="absolute z-30 top-6 right-6 text-gray-400 hover:text-white transition-colors p-2 rounded-full cursor-pointer hover:bg-white/10 outline-none hover:scale-105"
-                  aria-label="Close"
+          <div className="w-full md:w-1/4 md:bg-gray-2 flex flex-col overflow-hidden rounded-xl md:m-4">
+            <div className="border-b border-white/10 w-full flex flex-col gap-2 relative p-4">
+              <h3 className="text-md text-white font-bold">Group Details</h3>
+              <ToggleGroup.Root
+                type="single"
+                value={currentType}
+                onValueChange={(value) => {
+                  if (value) {
+                    setCurrentType(value as "cluster" | "genre");
+                    setSelectedGroupId("");
+                  }
+                }}
+                className="flex w-full gap-2"
+                aria-label="Toggle group type"
+              >
+                <ToggleGroup.Item
+                  value="cluster"
+                  aria-label="View clusters"
+                  className="hover:cursor-pointer text-xs py-1.5 px-3 rounded-full font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-8 data-[state=on]:bg-blue-8 data-[state=on]:shadow-sm data-[state=on]:text-white data-[state=off]:text-gray-10 data-[state=off]:hover:text-gray-11"
                 >
-                  <Cross1Icon className="w-5 h-5" />
-                </button>
-              </Dialog.Close>
+                  Clusters
+                </ToggleGroup.Item>
+                <ToggleGroup.Item
+                  value="genre"
+                  aria-label="View genres"
+                  className="hover:cursor-pointer text-xs py-1.5 px-3 rounded-full font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-8 data-[state=on]:bg-blue-8 data-[state=on]:shadow-sm data-[state=on]:text-white data-[state=off]:text-gray-10 data-[state=off]:hover:text-gray-11"
+                >
+                  Genres
+                </ToggleGroup.Item>
+              </ToggleGroup.Root>
             </div>
 
             <Accordion.Root
@@ -163,7 +203,7 @@ export default function GroupPanel({
 
                     {isMobile && (
                       <Accordion.Content asChild>
-                        <div className="flex gap-4 items-start flex-col">
+                        <div className="flex gap-4 items-start flex-col px-4">
                           <div className="pt-4">
                             <Dialog.Description className="text-xs font-medium text-gray-11 mt-1">
                               {selectedDesc?.title || "Unknown Group"}
@@ -185,7 +225,10 @@ export default function GroupPanel({
 
                           <div className="space-y-8">
                             {selectedData && (
-                              <GroupTags data={selectedData} type={type} />
+                              <GroupTags
+                                data={selectedData}
+                                type={currentType}
+                              />
                             )}
                             {selectedData && (
                               <div className="relative">
@@ -232,7 +275,9 @@ export default function GroupPanel({
             </div>
 
             <div className="p-6 space-y-8">
-              {selectedData && <GroupTags data={selectedData} type={type} />}
+              {selectedData && (
+                <GroupTags data={selectedData} type={currentType} />
+              )}
               {selectedData && <GroupFeatures data={selectedData} />}
             </div>
           </div>
