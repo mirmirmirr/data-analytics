@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import ReactECharts from "echarts-for-react";
-import * as echarts from "echarts";
 import type { Song } from "@/types/types";
 import SidePanel from "@/components/SidePanel";
 import LegendPanel from "@/components/Legend";
 import { BookmarkIcon } from "@radix-ui/react-icons";
+import { getChartConfigs } from "@/utils/chartOptions";
+import { useMinimapDrag } from "@/hooks/useMinimapDrag";
 
 type Props = {
   data: Song[];
@@ -13,10 +14,7 @@ type Props = {
 
 export default function MusicMap({ data, colorMode }: Props) {
   const [isMobile, setIsMobile] = useState(false);
-
-  // 1. Add state to control legend visibility
   const [showLegend, setShowLegend] = useState(false);
-
   const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
   const [activeTrackId, setActiveTrackId] = useState<string | null>(null);
   const [isDrawerHovered, setIsDrawerHovered] = useState(false);
@@ -26,9 +24,11 @@ export default function MusicMap({ data, colorMode }: Props) {
   const minimapAreaRef = useRef<HTMLDivElement>(null);
   const hoverIntentTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const isDraggingViewport = useRef(false);
-  const dragStartMouse = useRef({ x: 0, y: 0 });
-  const dragStartZoom = useRef({ xStart: 0, xEnd: 0, yStart: 0, yEnd: 0 });
+  const { onViewportDragStart, isDraggingViewport } = useMinimapDrag(
+    mainMapRef,
+    minimapAreaRef,
+    zoomBoxRef,
+  );
 
   const activeSong = activeTrackId
     ? data.find((d) => d.track_id === activeTrackId)
@@ -60,111 +60,13 @@ export default function MusicMap({ data, colorMode }: Props) {
     return String(a).localeCompare(String(b));
   });
 
-  const colors = [
-    "#FF3B30",
-    "#FF9F0A",
-    "#FFCC00",
-    "#34C759",
-    "#00C7BE",
-    "#32ADE6",
-    "#007AFF",
-    "#5856D6",
-    "#AF52DE",
-    "#FF2D55",
-  ];
-
-  const series: echarts.ScatterSeriesOption[] = uniqueGroups.map(
-    (groupId, index) => {
-      const groupData = data.filter((d) =>
-        colorMode === "cluster"
-          ? d.cluster === groupId
-          : d.track_genre === groupId,
-      );
-
-      const isDimmed =
-        selectedGroup !== null && selectedGroup !== String(groupId);
-      const activeColor = colors[index % colors.length];
-
-      return {
-        type: "scatter",
-        id: `group-${index}`,
-        name: `${colorMode === "cluster" ? "Cluster" : "Genre"} ${groupId}`,
-        data: groupData.map((d) => [
-          d.x,
-          d.y,
-          d.track_name,
-          d.cluster,
-          d.artists,
-          d.album_name,
-          d.track_genre,
-          d.track_id,
-        ]),
-        symbolSize: 10,
-        large: true,
-        largeThreshold: 2000,
-        itemStyle: {
-          color: isDimmed ? "#313131" : activeColor,
-          opacity: isDimmed ? 0.15 : 0.7,
-        },
-        emphasis: {
-          scale: true,
-          // focus: "self",
-          itemStyle: {
-            opacity: 1,
-            borderColor: activeColor,
-            borderWidth: 14,
-            shadowBlur: 12,
-            shadowColor: "rgba(0, 0, 0, 0.4)",
-          },
-        },
-      };
-    },
+  const { mainOptions, minimapOptions, colors } = getChartConfigs(
+    data,
+    colorMode,
+    uniqueGroups,
+    selectedGroup,
+    isMobile,
   );
-
-  const mainOptions: echarts.EChartsOption = {
-    animation: false,
-    backgroundColor: "transparent",
-    xAxis: { type: "value", show: false, scale: true },
-    yAxis: { type: "value", show: false, scale: true },
-    grid: {
-      top: isMobile ? 50 : 0,
-      left: isMobile ? 10 : 200,
-      right: isMobile ? 10 : 360,
-      bottom: isMobile ? 200 : 0,
-    },
-    dataZoom: [
-      {
-        id: "zoomX",
-        type: "inside",
-        xAxisIndex: 0,
-        zoomOnMouseWheel: true,
-        moveOnMouseMove: true,
-        filterMode: "none",
-      },
-      {
-        id: "zoomY",
-        type: "inside",
-        yAxisIndex: 0,
-        zoomOnMouseWheel: true,
-        moveOnMouseMove: true,
-        filterMode: "none",
-      },
-    ],
-    series: series,
-  };
-
-  const minimapOptions: echarts.EChartsOption = {
-    animation: false,
-    xAxis: { type: "value", show: false, scale: true },
-    yAxis: { type: "value", show: false, scale: true },
-    grid: { top: 0, left: 0, right: 0, bottom: 0 },
-    series: series.map((s) => ({
-      ...s,
-      symbolSize: 2,
-      itemStyle: { ...s.itemStyle, opacity: 0.4 },
-      emphasis: { disabled: true },
-    })),
-  };
 
   const onMainEvents = {
     mouseover: (params: any) => {
@@ -234,97 +136,12 @@ export default function MusicMap({ data, colorMode }: Props) {
     });
   };
 
-  const onViewportDragStart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (!mainMapRef.current || !minimapAreaRef.current) return;
-    isDraggingViewport.current = true;
-    dragStartMouse.current = { x: e.clientX, y: e.clientY };
-    const echartsInstance = mainMapRef.current.getEchartsInstance();
-    const dz = echartsInstance.getOption().dataZoom as any[];
-    dragStartZoom.current = {
-      xStart: dz[0].start,
-      xEnd: dz[0].end,
-      yStart: dz[1].start,
-      yEnd: dz[1].end,
-    };
-    window.addEventListener("mousemove", onViewportDragMove);
-    window.addEventListener("mouseup", onViewportDragEnd);
-  };
-
-  const onViewportDragMove = (e: MouseEvent) => {
-    if (
-      !isDraggingViewport.current ||
-      !mainMapRef.current ||
-      !minimapAreaRef.current
-    )
-      return;
-
-    const deltaX = e.clientX - dragStartMouse.current.x;
-    const deltaY = e.clientY - dragStartMouse.current.y;
-    const minimapWidth = minimapAreaRef.current.clientWidth;
-    const minimapHeight = minimapAreaRef.current.clientHeight;
-
-    const percentDeltaX = (deltaX / minimapWidth) * 100;
-    const percentDeltaY = -(deltaY / minimapHeight) * 100;
-
-    const startZoom = dragStartZoom.current;
-
-    let newXStart = startZoom.xStart + percentDeltaX;
-    let newXEnd = startZoom.xEnd + percentDeltaX;
-    let newYStart = startZoom.yStart + percentDeltaY;
-    let newYEnd = startZoom.yEnd + percentDeltaY;
-
-    const xRange = startZoom.xEnd - startZoom.xStart;
-    if (newXStart < 0) {
-      newXStart = 0;
-      newXEnd = xRange;
-    }
-    if (newXEnd > 100) {
-      newXEnd = 100;
-      newXStart = 100 - xRange;
-    }
-
-    const yRange = startZoom.yEnd - startZoom.yStart;
-    if (newYStart < 0) {
-      newYStart = 0;
-      newYEnd = yRange;
-    }
-    if (newYEnd > 100) {
-      newYEnd = 100;
-      newYStart = 100 - yRange;
-    }
-
-    if (zoomBoxRef.current) {
-      zoomBoxRef.current.style.left = `${newXStart}%`;
-      zoomBoxRef.current.style.bottom = `${newYStart}%`;
-    }
-
-    mainMapRef.current.getEchartsInstance().dispatchAction({
-      type: "dataZoom",
-      batch: [
-        { dataZoomId: "zoomX", start: newXStart, end: newXEnd },
-        { dataZoomId: "zoomY", start: newYStart, end: newYEnd },
-      ],
-    });
-  };
-
-  const onViewportDragEnd = () => {
-    isDraggingViewport.current = false;
-    window.removeEventListener("mousemove", onViewportDragMove);
-    window.removeEventListener("mouseup", onViewportDragEnd);
-  };
-
-  useEffect(() => {
-    return () => {
-      window.removeEventListener("mousemove", onViewportDragMove);
-      window.removeEventListener("mouseup", onViewportDragEnd);
-    };
-  }, []);
-
+  // Zoom to fit the selected group when it changes
   useEffect(() => {
     if (!mainMapRef.current || selectedGroup === null) return;
 
     const echartsInstance = mainMapRef.current.getEchartsInstance();
+
     const groupPoints = data.filter((d) =>
       colorMode === "cluster"
         ? String(d.cluster) === selectedGroup
@@ -369,7 +186,7 @@ export default function MusicMap({ data, colorMode }: Props) {
     <div className="relative w-full h-full overflow-hidden">
       {isMobile && (
         <button
-          className="absolute top-4 right-4 z-60 bg-gray-1/90 backdrop-blur-md shadow-lg border border-white/10 text-gray-400 hover:text-white transition-colors p-2.5 rounded-full cursor-pointer hover:bg-white/10 outline-none focus-visible:ring-2 focus-visible:ring-blue-8 hover:scale-110"
+          className="absolute top-4 right-4 z-60 bg-gray-1/90 backdrop-blur-md shadow-lg border border-white/10 text-gray-400 hover:text-white transition-colors p-2.5 rounded-full cursor-pointer hover:bg-white/10 outline-none focus-visible:ring-2 focus-visible:ring-blue-8 hover:scale-105"
           aria-label="Toggle Legend"
           onClick={() => setShowLegend((prev) => !prev)}
         >
