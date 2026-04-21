@@ -126,7 +126,7 @@ export default function SidePanel({
           </div>
         </>
       ) : activeTrackId && activeSong ? (
-        <div className="py-6 px-6 md:pr-2 flex flex-col gap-4 relative h-full overflow-y-auto custom-scrollbar">
+        <div className="md:py-6 px-6 md:pr-2 flex flex-col gap-4 relative h-full overflow-y-auto custom-scrollbar">
           <div className="flex gap-2">
             <GroupPanel
               type="cluster"
@@ -159,7 +159,7 @@ export default function SidePanel({
           </div>
         </div>
       ) : (
-        <div className="flex flex-col h-full gap-6 py-6 px-6 md:pr-2 text-start custom-scrollbar justify-between">
+        <div className="flex flex-col h-full gap-6 md:py-6 px-6 md:pr-2 text-start custom-scrollbar justify-between">
           <section>
             <h3 className="text-3xl font-bold text-white tracking-tight">
               Sona
@@ -244,7 +244,7 @@ export default function SidePanel({
           onMouseLeave={onMouseLeave}
           className="z-50 fixed flex flex-col bg-gray-1 rounded-t-2xl bottom-0 left-0 right-0 h-full max-h-[97%] -mx-px focus:outline-none"
         >
-          <Drawer.Handle className="w-10! h-1.5 bg-gray-4 rounded-full mx-auto m-2" />
+          <Drawer.Handle className="w-10! h-1.5 bg-gray-4 rounded-full mx-auto m-2 mb-4" />
           <div
             className={cn("flex flex-col max-w-md mx-auto w-full", {
               "overflow-y-auto": snap === 1,
