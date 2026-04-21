@@ -159,33 +159,43 @@ export default function SidePanel({
           </div>
         </div>
       ) : (
-        <div className="flex flex-col h-full pt-2 md:pt-8 p-8 text-start custom-scrollbar">
-          <h3 className="text-3xl font-bold text-white tracking-tight">
-            Sonorum
-          </h3>
-          <p className="text-xs text-gray-11">
-            from the latin word meaning "of sound".
-          </p>
-          <section className="mt-4 flex flex-col gap-4">
-            <p className="text-sm text-gray-11">
-              A sonorum visualizes songs based on their audio features, placing
-              similar tracks closer together to reveal hidden patterns in sound.
-            </p>
-            <ul className="text-sm text-gray-11 flex flex-col gap-2">
-              <li>
-                <b className="text-white">Clusters</b> group songs by their
-                actual characteristics, showing natural structures in the data.
-              </li>
-              <li>
-                <b className="text-white">Genres</b> overlay traditional labels,
-                exposing where those categories align—or break down.
-              </li>
-            </ul>
-            <p className="text-sm text-gray-11 italic">
-              Hover to explore individual tracks and see how they fit within
-              this evolving landscape of music.
-            </p>
+        <div className="flex flex-col h-full gap-6 pt-2 md:pt-8 p-8 text-start custom-scrollbar justify-between">
+          <section>
+            <h3 className="text-3xl font-bold text-white tracking-tight">
+              Sona
+            </h3>
+            <p className="text-xs text-gray-11">/ˈsoʊ.nə/</p>
+            <div className="mt-4 flex flex-col">
+              <p className="text-sm text-gray-11 italic">noun</p>
+              <p className="text-sm text-gray-11">
+                a mapping of music based on measurable features, revealing
+                patterns and proximities beyond traditional genre labels.
+              </p>
+            </div>
           </section>
+
+          <div className="flex flex-col gap-6">
+            <section className="flex flex-col bg-gray-3 rounded-xl p-4 gap-4 w-full">
+              <ul className="text-sm text-gray-11 flex flex-col gap-2">
+                <li>
+                  <b className="text-white">Clusters</b> group songs by their
+                  actual characteristics, showing natural structures in the
+                  data.
+                </li>
+                <li>
+                  <b className="text-white">Genres</b> overlay traditional
+                  labels, exposing where those categories align—or break down.
+                </li>
+              </ul>
+            </section>
+
+            <section className="flex flex-col bg-gray-3 rounded-xl p-4 gap-4 w-full">
+              <p className="text-sm text-gray-11 italic">
+                Hover to explore individual tracks on the map or click groups to
+                see their defining features and songs.
+              </p>
+            </section>
+          </div>
         </div>
       )}
     </>
@@ -210,7 +220,7 @@ export default function SidePanel({
       modal={false}
       open={true}
       dismissible={false}
-      snapPoints={[0.15, 0.5, 0.9]}
+      snapPoints={[0.2, 0.5, 0.9]}
       activeSnapPoint={snap}
       setActiveSnapPoint={setSnap}
     >
