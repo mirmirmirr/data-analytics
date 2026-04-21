@@ -321,6 +321,50 @@ export default function MusicMap({ data, colorMode }: Props) {
     };
   }, []);
 
+  useEffect(() => {
+    if (!mainMapRef.current || selectedGroup === null) return;
+
+    const echartsInstance = mainMapRef.current.getEchartsInstance();
+    const groupPoints = data.filter((d) =>
+      colorMode === "cluster"
+        ? String(d.cluster) === selectedGroup
+        : String(d.track_genre) === selectedGroup,
+    );
+
+    if (groupPoints.length === 0) return;
+
+    let minX = Infinity,
+      maxX = -Infinity;
+    let minY = Infinity,
+      maxY = -Infinity;
+
+    groupPoints.forEach((p) => {
+      if (p.x < minX) minX = p.x;
+      if (p.x > maxX) maxX = p.x;
+      if (p.y < minY) minY = p.y;
+      if (p.y > maxY) maxY = p.y;
+    });
+
+    const paddingX = (maxX - minX) * 0.1 || 1;
+    const paddingY = (maxY - minY) * 0.1 || 1;
+
+    echartsInstance.dispatchAction({
+      type: "dataZoom",
+      batch: [
+        {
+          dataZoomId: "zoomX",
+          startValue: minX - paddingX,
+          endValue: maxX + paddingX,
+        },
+        {
+          dataZoomId: "zoomY",
+          startValue: minY - paddingY,
+          endValue: maxY + paddingY,
+        },
+      ],
+    });
+  }, [selectedGroup, colorMode, data]);
+
   return (
     <div className="relative w-full h-full overflow-hidden">
       {isMobile && (
