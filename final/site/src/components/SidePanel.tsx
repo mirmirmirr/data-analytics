@@ -62,7 +62,7 @@ export default function SidePanel({
       {selectedGroupId ? (
         <>
           {/* EXPAND BUTTON */}
-          <div className="absolute top-2 right-4 z-30">
+          <div className="absolute top-6.5 md:top-2 right-4 z-30">
             <GroupPanel
               type={type}
               label={
@@ -71,7 +71,7 @@ export default function SidePanel({
               activeSong={activeSong}
               customTrigger={
                 <button
-                  className="p-2 text-gray-11 hover:scale-110 hover:text-white hover:bg-gray-4 rounded-full transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                  className="p-2 text-gray-11 bg-gray-1 hover:scale-110 hover:text-white hover:bg-gray-4 rounded-full transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                   aria-label="Expand group details"
                 >
                   <SizeIcon className="w-4 h-4" />
@@ -81,7 +81,7 @@ export default function SidePanel({
           </div>
 
           {/* Existing Content */}
-          <div className="pb-6 pl-6 pr-2 flex flex-col gap-4 relative h-full overflow-y-auto text-start custom-scrollbar">
+          <div className="pb-6 px-6 md:pr-2 flex flex-col gap-4 relative h-full overflow-y-auto text-start custom-scrollbar">
             <div className="flex flex-col">
               {selectedData && (
                 <div className="shrink-0 flex justify-center items-center hover:cursor-pointer relative">
@@ -126,7 +126,7 @@ export default function SidePanel({
           </div>
         </>
       ) : activeTrackId && activeSong ? (
-        <div className="py-6 pl-6 pr-2 flex flex-col gap-4 relative h-full overflow-y-auto custom-scrollbar">
+        <div className="py-6 px-6 md:pr-2 flex flex-col gap-4 relative h-full overflow-y-auto custom-scrollbar">
           <div className="flex gap-2">
             <GroupPanel
               type="cluster"
@@ -159,7 +159,7 @@ export default function SidePanel({
           </div>
         </div>
       ) : (
-        <div className="flex flex-col h-full gap-6 pt-2 md:pt-6 p-6 text-start custom-scrollbar justify-between">
+        <div className="flex flex-col h-full gap-6 py-6 px-6 md:pr-2 text-start custom-scrollbar justify-between">
           <section>
             <h3 className="text-3xl font-bold text-white tracking-tight">
               Sona
@@ -252,7 +252,7 @@ export default function SidePanel({
             })}
           >
             {panelContent}
-            <div className="h-8" />
+            <div className="h-10" />
           </div>
         </Drawer.Content>
       </Drawer.Portal>
