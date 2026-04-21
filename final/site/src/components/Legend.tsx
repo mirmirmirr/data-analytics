@@ -37,7 +37,7 @@ export default function LegendPanel({
         {colorMode === "cluster" ? "Clusters" : "Genres"}
       </h3>
 
-      <div className="flex flex-col overflow-y-auto pr-2 custom-scrollbar">
+      <div className="flex flex-wrap md:flex-col overflow-y-auto pr-2 custom-scrollbar">
         {uniqueGroups.map((groupId, index) => {
           const isActive =
             selectedGroup === null || selectedGroup === String(groupId);
@@ -59,7 +59,7 @@ export default function LegendPanel({
                 className="w-3 h-3 rounded-full shrink-0"
                 style={{ backgroundColor: color }}
               />
-              <span className="text-xs text-gray-11 truncate">
+              <span className="md:text-xs text-gray-11 truncate">
                 {colorMode === "cluster" ? "Cluster " : ""}
                 {groupId}
               </span>
@@ -91,8 +91,8 @@ export default function LegendPanel({
       }}
     >
       <Drawer.Portal>
-        <Drawer.Content className="fixed inset-x-0 bottom-0 z-70 flex flex-col rounded-t-3xl bg-gray-1 border-t border-white/10 shadow-2xl max-h-[45vh] focus:outline-none overflow-hidden">
-          <div className="mx-auto mt-4 mb-2 h-1.5 w-12 shrink-0 rounded-full bg-gray-6" />
+        <Drawer.Content className="z-50 fixed flex flex-col bg-gray-1 rounded-t-2xl bottom-0 left-0 right-0 h-70 -mx-px focus:outline-none">
+          <Drawer.Handle className="w-10! h-1.5! bg-gray-4 rounded-full mx-auto m-2 mb-4" />
           <div className="flex-1 overflow-y-auto p-6 pt-2">{content}</div>
         </Drawer.Content>
       </Drawer.Portal>
