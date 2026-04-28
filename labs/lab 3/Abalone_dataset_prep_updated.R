@@ -7,7 +7,8 @@ library(GGally)
 library(psych)
 
 ## read data
-abalone <- read.csv("~/Courses/Data Analytics/Fall24/labs/Lab02_2/abalone/abalone.data", header=FALSE)
+setwd("~/coding/data-analytics/labs/lab 3")
+abalone <- read.csv("abalone/abalone.data", header=FALSE)
 
 ## rename columns
 colnames(abalone) <- c("sex", "length", 'diameter', 'height', 'whole_weight', 'shucked_wieght', 'viscera_wieght', 'shell_weight', 'rings' ) 
